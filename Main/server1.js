@@ -11,11 +11,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Serve static files (like images and CSS)
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // Route to serve the HTML page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'webPage1.html'));
+    res.sendFile(path.join(__dirname, 'webPage_intro.html'));
 });
 
 // Handle form submission
@@ -50,3 +51,4 @@ app.post('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
+app.use(express.static('public'));
