@@ -1,0 +1,115 @@
+/* Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Layout */
+body {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    padding-top: 20px;
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: #1a252f;
+}
+
+/* Main Content Area */
+.content {
+    margin-left: 250px; /* Matches sidebar width */
+    padding: 20px;
+    flex: 1;
+}
+
+/* Sections for Content Display */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* Form Container */
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Header Styling */
+header {
+    margin-bottom: 30px;
+}
+
+header img {
+    max-width: 100px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+/* Form Styling */
+form {
+    display: block;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.column {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 250px;
+}
+
+/* Button Styling */
+button {
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45a049;
+}
