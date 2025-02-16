@@ -19,31 +19,63 @@ app.get('/', (req, res) => {
 });
 
 // Handle the complaints form submission (POST request)
-app.post('submit_complaint', (req, res) => {
+app.post('/submit_complaint', (req, res) => {
     // Extract data from the form
-    const { column1, column2, column3, column4, column5, column6, paragraph } = req.body;
+    const { namein, phnoin, district, pinno, email, ctitle, complaint } = req.body;
 
-    // Prepare the data for storage
-    const formData = `
-    Column 1: ${column1}
-    Column 2: ${column2}
-    Column 3: ${column3}
-    Column 4: ${column4}
-    Column 5: ${column5}
-    Column 6: ${column6}
-    Paragraph: ${paragraph}
-    -------------------------------
-    `;
+    // Get the current timestamp
+    const timestamp = new Date();
+    const date = timestamp.toISOString().split('T')[0]; // YYYY-MM-DD
+    const time = timestamp.toISOString().split('T')[1].split('.')[0]; // HH:MM:SS
 
-    // Append the data to a text file (you can change the file path as needed)
-    fs.appendFile('complaints.txt', formData, (err) => {
+    // Generate a unique complaint number based on the number of complaints already saved
+    fs.readFile('complaints_log.csv', 'utf8', (err, data) => {
         if (err) {
-            console.error('Error saving complaint data:', err);
-            res.status(500).send('There was an error saving your complaint.');
-        } else {
-            console.log('Complaint data saved!');
-            res.send('Your complaint has been submitted successfully.');
+            console.error('Error reading complaints log:', err);
+            return res.status(500).send('Error reading complaints log');
         }
+
+        // If the file is empty, start complaint_no at 1
+        const complaints = data.trim().split('\n');
+        const complaint_no = complaints.length > 1 ? parseInt(complaints[complaints.length - 1].split(',')[0]) + 1 : 1;
+
+        // Prepare the complaint content to be saved in the complaint file
+        const complaintContent = `
+        -------------------------------
+        Date: ${date}
+        Time: ${time}id
+        -------------------------------
+        \nComplaint No: ${complaint_no}
+        Name: ${namein}
+        Phone Number: ${phnoin}
+        District : ${district}
+        PIN Number : ${pinno}
+        Email Id: ${email}
+        Complaint Title : ${ctitle}
+        -------------------------------
+        \nParagraph: \n${complaint}
+        -------------------------------
+        `;
+
+        // Save the complaint in a unique file <complaint_no>.txt
+        fs.writeFile(`complaints/${complaint_no}.txt`, complaintContent, (err) => {
+            if (err) {
+                console.error('Error saving complaint data:', err);
+                return res.status(500).send('There was an error saving your complaint.');
+            }
+
+            // Log the complaint metadata into the CSV log file
+            const logEntry = `\n${complaint_no},${date},${time}`;
+            fs.appendFile('complaints_log.csv', logEntry, (err) => {
+                if (err) {
+                    console.error('Error logging complaint data:', err);
+                    return res.status(500).send('There was an error logging your complaint.');
+                }
+
+                console.log('Complaint data saved and logged!');
+                res.send('Your complaint has been submitted successfully.');
+            });
+        });
     });
 });
 
