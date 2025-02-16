@@ -4,6 +4,6 @@ Website development project for cyber wing of Ilahia college of Engineering and 
 
 # install
 To start working at file location run 
-##`npm install express`
+`npm install express`
 
 in terminal(files Created -> package.json, package-lock.json)
