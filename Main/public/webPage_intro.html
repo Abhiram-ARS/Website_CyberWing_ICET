@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Wing ICET</title>
-    <link rel="stylesheet" href="D:\CODING_CS\ReserchAndDevelopment\webCyberWing\styles.css"> <!-- Linking the CSS file -->
+    <link rel="stylesheet" href="..\css\styles.css"> <!-- Linking the CSS file -->
 </head>
 <body>
 
@@ -13,6 +13,7 @@
         <a href="#" onclick="showSection('home')">Home</a>
         <a href="#" onclick="showSection('about')">About</a>
         <a href="#" onclick="showSection('contact')">Contact</a>
+        <a href="#" onclick="showSection('complaints')">Complaints</a>
     </div>
 
     <!-- Main Content -->
@@ -29,6 +30,8 @@
             <h2>Contact Section</h2>
             <p>Contact us for more information.</p>
         </div>
+        <div id="complaints" class="section"> 
+        </div>
     </div>
 
     <script>
@@ -38,7 +41,21 @@
                 section.classList.remove('active');
             });
             // Show the selected section
-            document.getElementById(sectionId).classList.add('active');
+            const section = document.getElementById(sectionId);
+            section.classList.add('active');
+
+            if (sectionId === 'complaints') {
+                fetch('../webPage_complaint.html')  // Replace with your HTML file path
+                    .then(response => response.text())  // Convert response to text
+                    .then(htmlContent => {
+                        // Inject the content into the about section
+                        section.innerHTML = htmlContent;
+                    })
+                    .catch(error => {
+                        console.error('Error loading about section:', error);
+                        section.innerHTML = '<p>Sorry, there was an error loading the content.</p>';
+                    });
+            }
         }
     </script>
 
