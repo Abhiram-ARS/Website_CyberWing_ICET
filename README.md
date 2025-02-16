@@ -13,7 +13,7 @@ in terminal
 
 # File Organization
 
-webCyberWing
+`webCyberWing
 │  - package-lock.json
 │  - package.json
 │  - server.js
@@ -29,4 +29,4 @@ webCyberWing
     │      - styles.css
     │
     └───images
-           - testLogo.jpg
+           - testLogo.jpg`
