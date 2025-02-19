@@ -56,6 +56,19 @@
                         section.innerHTML = '<p>Sorry, there was an error loading the content.</p>';
                     });
             }
+
+            else if (sectionId === 'about') {
+                fetch('../webPage_introduction.html')  // Replace with your HTML file path
+                    .then(response => response.text())  // Convert response to text
+                    .then(htmlContent => {
+                        // Inject the content into the about section
+                        section.innerHTML = htmlContent;
+                    })
+                    .catch(error => {
+                        console.error('Error loading about section:', error);
+                        section.innerHTML = '<p>Sorry, there was an error loading the content.</p>';
+                    });
+            }
         }
     </script>
 
