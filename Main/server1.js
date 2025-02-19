@@ -12,10 +12,12 @@ app.use(bodyParser.json());
 
 // Serve static files from 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public','images')));
+
 
 // Serve the main page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'webPage_Intro.html'));
+    res.sendFile(path.join(__dirname, 'public', 'webPage_structure.html'));
 });
 
 // Handle the complaints form submission (POST request)
