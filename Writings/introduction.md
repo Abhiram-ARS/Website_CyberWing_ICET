@@ -1,6 +1,6 @@
 # Introduction to Cyber Wing ICET
 
-Cyber Wing ICET (Information and Communication Engineering Technology) is a premier student-led organization aimed at enhancing cybersecurity awareness and industrial training, both within and outside the campus. The organization focuses on providing crucial technical training and educating individuals, from students to the general public, on the significance of cybersecurity in today’s digital age. This initiative aims to establish the campus as a leading cybersecurity hub within the state, contributing to a safer digital environment for all.
+Cyber Wing ICET is a premier student-led organization aimed at enhancing cybersecurity awareness and industrial training, both within and outside the campus. The organization focuses on providing crucial technical training and educating individuals, from students to the general public, on the significance of cybersecurity in today’s digital age. This initiative aims to establish the campus as a leading cybersecurity hub within the state, contributing to a safer digital environment for all.
 
 ## 1. Mission and Vision
 
