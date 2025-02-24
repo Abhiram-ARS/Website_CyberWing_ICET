@@ -48,11 +48,3 @@ Cyber Wing ICET is committed to fostering a strong cybersecurity culture through
 - Establishing partnerships with global cybersecurity firms.
 - Hosting international cybersecurity conferences and training sessions.
 
-## Contact & Membership
-Interested in joining Cyber Wing ICET's dedicated workspace? Reach out to us:
-- **Email:** cyberwing@icet.edu
-- **Location:** ICET Cybersecurity Lab, Innovation Block
-- **Membership:** Register via our official website [www.cyberwingicet.com](#)
-
-Join us in shaping the future of cybersecurity with Cyber Wing ICET! 🚀
-
