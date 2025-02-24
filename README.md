@@ -13,22 +13,23 @@ in terminal
 
 # File Organization
 ```
-webCyberWing\
-│  - package-lock.json\
-│  - package.json\
-│  - server.js\
-│\
-├───node_modules\
-│   ├───...\
-└───public\
-    │  - pageNotFound.html\
-    │  - webPage_complaint.html\
-    │  - webPage_intro.html\
+webCyberWing
+│  - package-lock.json
+│  - package.json
+│  - server.js
+│
+├───node_modules
+│   ├───...
+│
+└───public
+    │  - pageNotFound.html
+    │  - webPage_complaint.html
+    │  - webPage_intro.html
     │
-    ├───css\
-    │      - styles.css\
-    │\
-    └───images\
-           - testLogo.jpg\
+    ├───css
+    │      - styles.css
+    │
+    └───images
+           - testLogo.jpg
 
 ```
