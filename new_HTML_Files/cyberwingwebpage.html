@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Wing ICET</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Global Styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #111;
+      color: #00FF00;
+      text-align: center;
+      padding:20px;
+      font-family: 'Orbitron';
+      z-index: 10;
+      position: relative;
+      padding-bottom: 1px;
+      padding-right: 1px;
+      padding-left: 1px;
+    }
+    
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      margin-top: 2px;
+      margin-bottom: 9px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top:10px;
+      /* text-shadow: 0px 0px 10px #00FF00; */
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #222;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    nav a {
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      display: block;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+      background-color: #131313;
+    }
+
+    .section {
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00FF00;
+      text-shadow: 0px 0px 10px #00FF00;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      color: #888;
+    }
+
+    .cards-container {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background-color: #1d2331;
+      border-radius: 10px;
+      width: 250px;
+      padding: 15px;
+      transition: transform 0.3s ease;
+      background-blend-mode: lighten;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px 10px 0 0;
+      
+    }
+
+    .card-content {
+      color: white;
+    }
+
+    .card-content h3 {
+      font-size: 1.5rem;
+      color: #00FF00;
+    }
+
+    .card-content p {
+      color: #bbb;
+    }
+
+    footer {
+      background-color: #111;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 1rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* JavaScript background canvas */
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- JavaScript Background (Network Animation) -->
+  <canvas id="networkCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const nodes = [];
+    const numNodes = 100;
+    const maxDistance = 100;
+
+    class Node {
+        constructor(x, y, z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.dx = Math.random() * 2 - 1;
+            this.dy = Math.random() * 2 - 1;
+            this.dz = Math.random() * 2 - 1;
+        }
+
+        update() {
+            this.x += this.dx;
+            this.y += this.dy;
+            this.z += this.dz;
+
+            if (this.x < 0 || this.x > canvas.width) this.dx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.dy *= -1;
+            if (this.z < -500 || this.z > 500) this.dz *= -1;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, Math.abs(this.z) / 500 * 2 + 1, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 255, 0, ${1 - Math.abs(this.z) / 500})`;  // Hackergreen color
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < numNodes; i++) {
+        nodes.push(new Node(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 1000 - 500));
+    }
+
+    function drawLine(x1, y1, x2, y2, opacity) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = `rgba(0, 255, 0, ${opacity})`;  // Hackergreen color for lines
+        ctx.stroke();
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        nodes.forEach(node => {
+            node.update();
+            node.draw();
+        });
+
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const distance = Math.sqrt(
+                    (nodes[i].x - nodes[j].x) ** 2 +
+                    (nodes[i].y - nodes[j].y) ** 2 +
+                    (nodes[i].z - nodes[j].z) ** 2
+                );
+
+                if (distance < maxDistance) {
+                    drawLine(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y, 1 - distance / maxDistance);
+                }
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+    
+    function scrollToSection(id) {
+    var section = document.getElementById(id);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+
+    animate();
+
+  </script>
+
+  <!-- Header Section -->
+  <header>
+    <h1>Cyber Wing ICET</h1>
+    <p>Your Hub for Cybersecurity Awareness and Training</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#mission">Mission & Vision</a>
+    <a href="#objectives">Core Objectives</a>
+    <a href="#activities">Key Activities</a>
+    <a href="#impact">Impact Goals</a>
+    <a href="#collaborations">Strategic Collaborations</a>
+    <a href="#future">Future Plans</a>
+  </nav>
+
+  <!-- Mission & Vision Section -->
+  <div id="mission" class="section">
+    <h2>Mission & Vision</h2>
+    <p><strong>Mission:</strong> Enhance cybersecurity awareness, provide hands-on training, and build a secure cyberspace.</p>
+    <p><strong>Vision:</strong> To position as a leading cybersecurity hub, offering advanced training programs and raising awareness.</p>
+  </div>
+
+  <!-- Core Objectives Section -->
+  <div id="objectives" class="section">
+    <h2>Core Objectives</h2>
+    <p><strong>Cybersecurity Awareness:</strong> Educating individuals on online safety and best practices.</p>
+    <p><strong>Skill Development:</strong> Offering industrial training and workshops on various cybersecurity techniques.</p>
+    <p><strong>Building a Cybersecurity Community:</strong> Sharing knowledge and collaborating to innovate in the cybersecurity field.</p>
+    <p><strong>Cyber Threat Mitigation:</strong> Preparing students to tackle cyber threats with problem-solving skills.</p>
+  </div>
+
+  <!-- Key Activities Section -->
+  <div id="activities" class="section">
+    <h2>Key Activities</h2>
+    <div class="cards-container">
+      <div class="card">
+        <!--<img src="D:/CYBER WING ICET/images/4.jpg" alt="Awareness Campaigns">-->
+        <div class="card-content">
+          <h3>Awareness Campaigns</h3>
+          <p>Campaigns on online privacy, phishing, data protection, and more.</p>
+        </div>
+      </div>
+      <div class="card">
+        <!-- <img src="https://via.placeholder.com/250x150" alt="Workshops & Training">-->
+        <div class="card-content">
+          <h3>Workshops & Training</h3>
+          <p>Hands-on sessions on ethical hacking, cryptography, and malware analysis.</p>
+        </div>
+      </div>
+      <div class="card">
+        <!--<img src="https://via.placeholder.com/250x150" alt="Hackathons & Competitions">-->
+        <div class="card-content">
+          <h3>Hackathons & Competitions</h3>
+          <p>Engage in cybersecurity challenges and competitions to test your skills.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Impact Goals Section -->
+  <div id="impact" class="section">
+    <h2>Impact Goals</h2>
+    <p><strong>Establishing a Cybersecurity Ecosystem:</strong> Building a sustainable education hub.</p>
+    <p><strong>Enhancing Industry Readiness:</strong> Preparing students for careers in cybersecurity.</p>
+    <p><strong>Cybersecurity Research and Innovation:</strong> Encouraging innovative projects and research.</p>
+    <p><strong>Improving Digital Security:</strong> Raising awareness to reduce cybercrime.</p>
+  </div>
+
+  <!-- Strategic Collaborations Section -->
+  <div id="collaborations" class="section">
+    <h2>Strategic Collaborations</h2>
+    <p>Collaborating with government bodies, cybersecurity firms, and academic institutions to build a stronger cybersecurity ecosystem.</p>
+  </div>
+
+  <!-- Future Plans Section -->
+  <div id="future" class="section">
+    <h2>Future Plans</h2>
+    <p><strong>Expansion of Programs:</strong> Launching new cybersecurity courses and certifications.</p>
+    <p><strong>National-Level Events:</strong> Hosting cybersecurity events, conferences, and seminars.</p>
+    <p><strong>Cybersecurity Labs:</strong> Establishing practical labs for hands-on training.</p>
+    <p><strong>Community Outreach:</strong> Extending cybersecurity education to the broader community.</p>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Cyber Wing ICET. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
