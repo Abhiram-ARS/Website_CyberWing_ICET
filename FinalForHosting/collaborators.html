@@ -1,0 +1,262 @@
+<!-- CODE DEVELOPED  BY BIBIN BOBY VARGHESE-->
+<!-- 
+  Copyright © 2025 Cyber Wing ICET. All rights reserved.
+  This code is proprietary and may not be used, modified, or distributed without permission.
+-->
+  <!-- 
+  Copyright © 2025 BIBIN BOBY VARGHESE. All rights reserved.
+  This code is proprietary and may not be used, modified, or distributed without permission.
+-->
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name ="author" content="BIBIN BOBY VARGHESE">
+    <title>OUR COLLABORATORS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #010729;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+
+        header {
+            background: linear-gradient(to right,#0A0F2D 30%,#000d4d 70%);
+            color: #ffff;
+            text-align: left;
+            padding: 40px;
+            z-index: 10;
+            position: relative;
+            margin: 0;
+        }
+
+        header img {
+            object-fit: contain;
+            top: 0;
+            right: 0;
+            height: 130px;
+            width: 140px;
+            position: absolute;
+            padding-right: 20px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        .collaborators-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 20px;
+        }
+
+        .collaborator-box {
+            width: 30%;
+            background-color: #02092e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .collaborator-box:hover {
+            transform: scale(1.05);
+        }
+
+        .collaborator-header {
+            background-color: #02092e;
+            color: #00FF00;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .collaborator-header img {
+            max-height: 100px;
+            max-width: 120px;
+            margin: 10px 0;
+        }
+
+        .collaborator-header h2 {
+            margin-top: 10px;
+            font-size: 22px;
+        }
+
+        .image-display {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-color: #03125acb;
+        }
+
+        .image-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateY(-50%);
+        }
+
+        .image-controls button {
+            background-color: rgba(0, 255, 0, 0.7);
+            border: none;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 24px;
+        }
+
+        .image-controls button:hover {
+            background-color: #00FF00;
+        }
+
+        .description {
+            padding: 20px;
+            background-color: #02092e;
+            color: #ddd;
+            text-align: center;
+        }
+
+        .description h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #00FF00;
+        }
+
+        .description p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="networkCanvas"></canvas>
+
+    <header>
+        <h1>OUR COLLABORATORS</h1>
+        <a href="cyberwingwebpage.html"><img src="logo.png" alt="logo.png"></a>
+    </header>
+
+    <div class="collaborators-container">
+        <!-- Collaborator 1 -->
+        <div class="collaborator-box">
+            <div class="collaborator-header">
+                <img src="logo1.png" alt="Collaborator 1 Logo">
+                <h2>TECH BY HEART</h2>
+            </div>
+            <div class="image-display">
+                <img src="collaborator1_image1.jpg" alt="Collaborator 1 Image" id="collaborator1Image">
+                <div class="image-controls">
+                    <button id="prev1">←</button>
+                    <button id="next1">→</button>
+                </div>
+            </div>
+            <div class="description">
+                <h3>TECH BY HEART</h3>
+                <p>This is a description about Collaborator 1. They specialize in innovative tech solutions and have partnered with us to bring cutting-edge advancements in our field.</p>
+            </div>
+        </div>
+
+        <!-- Collaborator 2 -->
+        <div class="collaborator-box">
+            <div class="collaborator-header">
+                <img src="logo2.png" alt="Collaborator 2 Logo">
+                <h2>KERALA POLICE CYBERDOME</h2>
+            </div>
+            <div class="image-display">
+                <img src="collaborator2_image1.jpg" alt="Collaborator 2 Image" id="collaborator2Image">
+                <div class="image-controls">
+                    <button id="prev2">←</button>
+                    <button id="next2">→</button>
+                </div>
+            </div>
+            <div class="description">
+                <h3> KERALA POLICE CYBERDOME</h3>
+                <p>This is a description about Collaborator 2. They are leaders in the field of AI development and we are thrilled to collaborate with them to push the boundaries of what is possible.</p>
+            </div>
+        </div>
+
+        <!-- Collaborator 3 -->
+        <div class="collaborator-box">
+            <div class="collaborator-header">
+                <img src="logo3.png" alt="Collaborator 3 Logo">
+                <h2>ALIBI GLOBAL</h2>
+            </div>
+            <div class="image-display">
+                <img src="collaborator3_image1.jpg" alt="Collaborator 3 Image" id="collaborator3Image">
+                <div class="image-controls">
+                    <button id="prev3">←</button>
+                    <button id="next3">→</button>
+                </div>
+            </div>
+            <div class="description">
+                <h3>ALIBI GLOBAL</h3>
+                <p>This is a description about Collaborator 3. Their expertise in cybersecurity has helped us create secure and resilient systems for our clients.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let collaborator1Images = ['collaborator1_image1.jpg', 'collaborator1_image2.jpg', 'collaborator1_image3.jpg'];
+        let collaborator2Images = ['collaborator2_image1.jpg', 'collaborator2_image2.jpg', 'collaborator2_image3.jpg'];
+        let collaborator3Images = ['collaborator3_image1.jpg', 'collaborator3_image2.jpg', 'collaborator3_image3.jpg'];
+
+        let currentImage1 = 0;
+        let currentImage2 = 0;
+        let currentImage3 = 0;
+
+        document.getElementById('next1').onclick = function() {
+            currentImage1 = (currentImage1 + 1) % collaborator1Images.length;
+            document.getElementById('collaborator1Image').src = collaborator1Images[currentImage1];
+        };
+
+        document.getElementById('prev1').onclick = function() {
+            currentImage1 = (currentImage1 - 1 + collaborator1Images.length) % collaborator1Images.length;
+            document.getElementById('collaborator1Image').src = collaborator1Images[currentImage1];
+        };
+
+        document.getElementById('next2').onclick = function() {
+            currentImage2 = (currentImage2 + 1) % collaborator2Images.length;
+            document.getElementById('collaborator2Image').src = collaborator2Images[currentImage2];
+        };
+
+        document.getElementById('prev2').onclick = function() {
+            currentImage2 = (currentImage2 - 1 + collaborator2Images.length) % collaborator2Images.length;
+            document.getElementById('collaborator2Image').src = collaborator2Images[currentImage2];
+        };
+
+        document.getElementById('next3').onclick = function() {
+            currentImage3 = (currentImage3 + 1) % collaborator3Images.length;
+            document.getElementById('collaborator3Image').src = collaborator3Images[currentImage3];
+        };
+
+        document.getElementById('prev3').onclick = function() {
+            currentImage3 = (currentImage3 - 1 + collaborator3Images.length) % collaborator3Images.length;
+            document.getElementById('collaborator3Image').src = collaborator3Images[currentImage3];
+        };
+    </script>
+</body>
+</html>

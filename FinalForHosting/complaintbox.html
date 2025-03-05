@@ -1,0 +1,167 @@
+<!-- CODE DEVELOPED  BY BIBIN BOBY VARGHESE-->
+<!-- 
+  Copyright © 2025 Cyber Wing ICET. All rights reserved.
+  This code is proprietary and may not be used, modified, or distributed without permission.
+-->
+  <!-- 
+  Copyright © 2025 BIBIN BOBY VARGHESE. All rights reserved.
+  This code is proprietary and may not be used, modified, or distributed without permission.
+-->
+
+<!DOCTYPE html>
+<html lang="eng">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="BIBIN BOBY VARGHESE">
+    <title>Complaint Box</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            font-family: 'Poppins', sans-serif;
+            background-color: #010729;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        header {
+            color: #ffffff;
+            text-align: left;
+            font-family: 'Poppins';
+            font-weight: bolder;
+            z-index: 10;
+            position: relative;
+            background: linear-gradient(to right, #0A0F2D 30%, #000d4d 70%);
+            padding: 10px 30px;
+        }
+
+        header h1 {
+            font-size: 40px;
+            margin: 0;
+            padding-bottom: 8px;
+        }
+
+        /* Style for the complaint box */
+        .complaint-box {
+            width: 100%;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 50px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            padding-right: 70px;
+            
+        }
+
+        .complaint-box h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .complaint-box label {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .complaint-box input[type="text"],
+        .complaint-box input[type="email"],
+        .complaint-box input[type="tel"],
+        .complaint-box textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background-color: #ffffff;
+            color: #fff;
+            resize: vertical;
+        }
+
+        .complaint-box button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .complaint-box button:hover {
+            background-color: #45a049;
+        }
+
+        /* Make the form responsive */
+        @media screen and (max-width: 768px) {
+            .complaint-box {
+                padding: 20px;
+            }
+            .complaint-box h2 {
+                font-size: 28px;
+            }
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: auto;
+        }
+        header img{
+            height: 70px;
+            width: 80px;
+            position: absolute;
+            top:0;
+            right:0;
+            padding-right: 20px;
+            padding-top: 10px;
+        }
+    </style>
+    
+    <body>
+        <header>
+            <h1>COMPLAINT BOX</h1>
+            <a href="cyberwingwebpage.html"><img src="logo.png" style="size: 5px;"></a>
+        </header>
+        <canvas id="networkCanvas"></canvas>
+        <script src="network.js"></script>
+
+        <div class="complaint-box">
+            <h2>Submit Your Complaint</h2>
+            <form action="submit_complaint.php" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+
+                <label for="place">Your Place:</label>
+                <input type="text" id="place" name="place" required placeholder="Enter your place">
+
+                <label for="complaint">Your Complaint:</label>
+                <textarea id="complaint" name="complaint" required placeholder="Describe your complaint here"></textarea>
+
+                <button type="submit">Submit Complaint</button>
+            </form>
+        </div>
+
+    </body>
+</html>
