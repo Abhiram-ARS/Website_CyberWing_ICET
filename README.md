@@ -15,5 +15,5 @@ Hosted Link : https://sites.google.com/view/test1x-g-z-f-s-u-z-k/home
 - Complaints or Help
 
 
-
-
+# Webpages
+This project is licensed under the MIT License.
