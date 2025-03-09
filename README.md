@@ -4,7 +4,7 @@ The Cyber Wing of Ilahia College of Engineering and Technology (ICET) plays a cr
 The website will provide resources, event details, membership information, and interactive content to engage students, faculty, and industry professionals interested in cyber security. Additionally, it will serve as a centralized portal for updates, training programs, and collaborations with external organizations.
 
 # Deployment
-Hosted Link : https://sites.google.com/view/test1x-g-z-f-s-u-z-k/home
+Hosted Link : https://sites.google.com/view/cyberwingicet
 
 # Webpages
 - Home
@@ -15,5 +15,5 @@ Hosted Link : https://sites.google.com/view/test1x-g-z-f-s-u-z-k/home
 - Complaints or Help
 
 
-# Webpages
+# license
 This project is licensed under the MIT License.
