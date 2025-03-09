@@ -13,7 +13,7 @@ A passionate and skilled group of cybersecurity and web development enthusiasts 
 
 - **[Bibin Boby Varghese](https://github.com/bibinbobyvarghese)**
   - Frontend Developer
-  - Designer
+  - Visual Designer
   - Theme Designer
 
 # Deployment
