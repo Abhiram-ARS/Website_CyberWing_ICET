@@ -10,7 +10,7 @@ A passionate and skilled group of cybersecurity and web development enthusiasts 
   - Backend Developer
   - Database Manager
 
-- **Member 2**
+- **Bibin Boby Varghese**
   - Frontend Developer
   - Designer
   - Theme Designer
