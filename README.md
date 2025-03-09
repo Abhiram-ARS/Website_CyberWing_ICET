@@ -6,11 +6,12 @@ The website will provide resources, event details, membership information, and i
 # Team 
 A passionate and skilled group of cybersecurity and web development enthusiasts who worked together to develop a secure and dynamic website for the Cyber Wing ICET. Our team combines expertise in web development and project management to deliver a platform that meets the organization's needs.
 
-- **Abhiram S**
+- **[Abhiram S](https://github.com/Abhiram-ARS)**
+  - Deployment In-Charge
   - Backend Developer
   - Database Manager
 
-- **Bibin Boby Varghese**
+- **[Bibin Boby Varghese](https://github.com/bibinbobyvarghese)**
   - Frontend Developer
   - Designer
   - Theme Designer
