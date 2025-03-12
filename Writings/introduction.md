@@ -6,19 +6,19 @@ Cyber Wing ICET is a premier student-led organization aimed at enhancing cyberse
 
 ### Mission
 
-- **Fostering Cybersecurity Awareness:** Creating widespread awareness of cybersecurity, emphasizing the importance of online safety and cybersecurity education at all levels.
-- **Providing Technical Training:** Equipping students and professionals with skills such as ethical hacking, cryptography, and network security.
-- **Encouraging Active Participation:** Organizing events, workshops, and training programs to motivate engagement in the cybersecurity field.
-- **Equipping for Real-World Challenges:** Offering hands-on experience through simulated cyberattack scenarios and practical training.
-- **Building a Secure Cyberspace:** Empowering individuals with the knowledge and skills to prevent, identify, and resolve cyber threats.
+- Creating widespread awareness of cybersecurity, emphasizing the importance of online safety and cybersecurity education at all levels.
+- Equipping students and professionals with skills such as ethical hacking, cryptography, and network security.
+- Organizing events, workshops, and training programs to motivate engagement in the cybersecurity field.
+- Offering hands-on experience through simulated cyberattack scenarios and practical training.
+- Empowering individuals with the knowledge and skills to prevent, identify, and resolve cyber threats.
 
 ### Vision
 
-- **Positioning as a Leading Cybersecurity Hub:** Establishing the campus as a prominent cybersecurity center within the state.
-- **Delivering Advanced Training Programs:** Offering cutting-edge technical training to students, faculty, and professionals.
-- **Raising Awareness through Campaigns:** Conducting campaigns to educate the community on online privacy, phishing, and cybercrime prevention.
-- **Hands-on Experience with Real-World Cyber Threats:** Providing practical exposure through simulations, competitions, and internships.
-- **Creating a Collaborative Cybersecurity Community:** Building a network of students, faculty, industry experts, and government bodies.
+- Establishing the campus as a prominent cybersecurity center within the state.
+- Offering cutting-edge technical training to students, faculty, and professionals.
+- Conducting campaigns to educate the community on online privacy, phishing, and cybercrime prevention.
+- Providing practical exposure through simulations, competitions, and internships.
+- Building a network of students, faculty, industry experts, and government bodies.
 
 ## 2. Core Objectives
 
