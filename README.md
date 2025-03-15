@@ -20,12 +20,12 @@ The website will provide resources, event details, membership information, and i
 Hosted Link : https://sites.google.com/view/cyberwingicet
 
 # Webpages
-- [ ]Home
-- [ ]Colaborators
-- [ ]Hackathons & Competitions
-- [ ]Workshops & Trainings
-- [ ]Awareness Campaigns
-- [ ]Complaints or Help
+- [x] Home
+- [ ] Colaborators
+- [ ] Hackathons & Competitions
+- [ ] Workshops & Trainings
+- [ ] Awareness Campaigns
+- [ ] Complaints or Help
 
 
 # license
