@@ -18,16 +18,16 @@ The website will provide resources, event details, membership information, and i
 
 # Deployment
 Hosted Link : https://sites.google.com/view/cyberwingicet
-## Versions :- [version format ]
+### Versions :- 
+1. **[version_0.1.1](https://github.com/Abhiram-ARS/Website_CyberWing_ICET/releases/tag/Website_CyberWing_ICET)** (20-03-2025), Testing Phase
 
 # Webpages
 - [x] Home
-- [ ] Colaborators
-- [ ] Hackathons & Competitions
-- [ ] Workshops & Trainings
-- [ ] Awareness Campaigns
-- [ ] Complaints or Help
-
+- [x] Colaborators
+- [x] Hackathons & Competitions
+- [x] Workshops & Trainings
+- [x] Awareness Campaigns
+- [x] Complaints or Help
 
 # license
 This project is licensed under the MIT License.
