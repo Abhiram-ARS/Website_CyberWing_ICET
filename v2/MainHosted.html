@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberWing | Intelligent & Interactive Digital Defense</title>
+    <link rel="icon" href="http://googleusercontent.com/file_content/0" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #3b82f6;
+            --color-primary-dark: #1d4ed8;
+            --color-accent: #10b981;
+            --color-text: #0f172a;
+            --color-text-muted: #64748b;
+            --color-background: #f1f5f9;
+            --color-surface: #ffffff;
+            --color-border: #e2e8f0;
+            --color-dark-surface: #020617;
+            --color-hero-bg: #010409;
+
+            --font-family: 'Inter', sans-serif;
+            --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --border-radius: 12px;
+            --transition-speed: 0.3s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 6rem 0; position: relative; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header .subtitle { color: var(--color-primary); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .section-header .title { font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .section-header .description { font-size: 1.1rem; color: var(--color-text-muted); max-width: 600px; margin: 0 auto; }
+
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.5rem 0; /* Increased padding */
+            transition: all var(--transition-speed) ease;
+        }
+        header.scrolled {
+             background: rgba(2, 6, 23, 0.8); /* Darker scrolled background */
+             backdrop-filter: blur(10px);
+             box-shadow: var(--shadow-sm); padding: 0.75rem 0;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 45px; transition: all var(--transition-speed) ease; }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+        /* MODIFIED NAV LINK COLORS */
+        .nav-links a { color: #94a3b8; text-decoration: none; font-weight: 500; position: relative; transition: all var(--transition-speed) ease; }
+        .nav-links a:hover { color: white; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background: #a855f7; transition: all var(--transition-speed) ease; }
+        .nav-links a:hover::after { width: 100%; }
+        .mobile-menu-toggle { display: none; background: none; border: none; cursor: pointer; z-index: 1001; padding: 0.5rem; }
+        .mobile-menu-toggle .icon-bar { display: block; width: 25px; height: 3px; background-color: white; margin: 5px 0; transition: all var(--transition-speed) ease; }
+        .mobile-menu-toggle.active .icon-bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .mobile-menu-toggle.active .icon-bar:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.active .icon-bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .hero {
+            height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;
+            background-color: var(--color-hero-bg);
+        }
+        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; }
+        .hero-content { z-index: 2; position: relative; }
+        /* MODIFIED HERO H1 STYLES */
+        .hero h1 {
+            font-family: var(--font-family); /* Reverted to standard font */
+            font-size: 4.5rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.1;
+            background: linear-gradient(90deg, #a855f7, #ec4899); /* New gradient */
+            background-size: 100% auto;
+            -webkit-background-clip: text; 
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: none; /* Removed shine animation */
+        }
+        .hero .subtitle-container { font-size: 1.5rem; color: #94a3b8; min-height: 2.2rem; margin-bottom: 2.5rem; }
+        .cta-group { display: flex; gap: 1rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 1.8rem; border-radius: var(--border-radius); font-weight: 600; text-decoration: none; transition: all var(--transition-speed) ease; border: 2px solid transparent; }
+        .btn-primary { background-color: var(--color-primary); color: white; }
+        .btn-primary:hover { background-color: var(--color-primary-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        /* MODIFIED SECONDARY BUTTON */
+        .btn-secondary { background-color: #1e293b; color: white; border-color: #334155; }
+        .btn-secondary:hover { background-color: #334155; border-color: #475569; transform: translateY(-2px); }
+
+        #hero-fade-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(to top, var(--color-surface), transparent);
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+            pointer-events: none;
+        }
+
+        #services { 
+            background-color: var(--color-surface);
+        }
+        .services-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
+        }
+        .service-card {
+            flex: 0 1 320px;
+            background: var(--color-surface); padding: 2.5rem 2rem; border-radius: var(--border-radius);
+            border: 1px solid var(--color-border); text-align: center; transition: all var(--transition-speed) ease;
+            transform-style: preserve-3d;
+        }
+        .service-card:hover { transform: translateY(-10px) rotateX(5deg) scale(1.02); box-shadow: var(--shadow-lg); border-color: var(--color-primary); }
+        .service-card .icon { font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1.5rem; transition: transform var(--transition-speed) ease; }
+        .service-card:hover .icon { transform: scale(1.1); }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .service-card p { color: var(--color-text-muted); }
+        .section-cta { text-align: center; margin-top: 4rem; }
+
+        #stats { 
+            background-color: var(--color-primary-dark);
+            color: white;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(29, 78, 216, 0.85);
+            z-index: 1;
+        }
+        #stats .container {
+            position: relative;
+            z-index: 2;
+        }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; }
+        .stat-item { transition: transform var(--transition-speed) ease; }
+        .stat-item:hover { transform: scale(1.05); }
+        .stat-item .number { font-size: 3.5rem; font-weight: 800; }
+        .stat-item .label { font-size: 1.1rem; opacity: 0.8; }
+        
+        #awareness { background-color: var(--color-surface); }
+        .awareness-card {
+            width: 340px;
+            margin: 0 1rem;
+            flex-shrink: 0;
+            background: var(--color-background); 
+            border-radius: var(--border-radius); 
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: default;
+        }
+        .awareness-card.center {
+            transform: rotateY(0) scale(1.05);
+            opacity: 1;
+            cursor: pointer;
+        }
+        .awareness-card.left-1 {
+            transform: translateX(-40%) rotateY(35deg) scale(0.9);
+            opacity: 0.6;
+        }
+        .awareness-card.right-1 {
+            transform: translateX(40%) rotateY(-35deg) scale(0.9);
+            opacity: 0.6;
+        }
+        .awareness-card.left-2 {
+            transform: translateX(-70%) rotateY(40deg) scale(0.8);
+            opacity: 0.3;
+        }
+        .awareness-card.right-2 {
+            transform: translateX(70%) rotateY(-40deg) scale(0.8);
+            opacity: 0.3;
+        }
+        .awareness-card.hide {
+            transform: scale(0.7);
+            opacity: 0;
+        }
+        .awareness-card .card-banner { background: var(--color-primary); color: white; padding: 1.5rem; text-align: center; }
+        .awareness-card .card-banner .icon { font-size: 3rem; }
+        .awareness-card .card-content { padding: 2rem; }
+        .awareness-card .card-content h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .awareness-card .card-content p { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 1.5rem; }
+        .awareness-card .card-content .tip-list { list-style: none; padding-left: 0; }
+        .awareness-card .card-content .tip-list li { position: relative; padding-left: 25px; margin-bottom: 0.5rem; }
+        .awareness-card .card-content .tip-list li::before {
+            content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            color: var(--color-accent); position: absolute; left: 0; top: 2px;
+        }
+
+        .awareness-slider-container {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        .awareness-slider-viewport {
+            overflow: hidden;
+            width: 100%;
+            height: 480px;
+            perspective: 1500px;
+        }
+        .awareness-slider {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--color-border);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--color-text);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-speed) ease;
+        }
+        .slider-btn:hover {
+            background-color: var(--color-primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .slider-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%) scale(0.95);
+        }
+        .prev-btn {
+            left: -20px;
+        }
+        .next-btn {
+            right: -20px;
+        }
+        @media (max-width: 1280px) {
+            .prev-btn { left: 10px; }
+            .next-btn { right: 10px; }
+        }
+
+        .slider-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .pagination-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-border);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: none;
+        }
+        .pagination-dot.active {
+            width: 32px;
+            border-radius: 4px;
+            background-color: var(--color-primary);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content-wrapper {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius);
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transform: translateY(-30px) scale(0.97);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                        opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 2rem 2.5rem;
+        }
+        .modal-overlay.active .modal-content-wrapper {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2.2rem;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            line-height: 1;
+            transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+        .modal-close-btn:hover {
+            color: var(--color-text);
+            transform: rotate(90deg);
+        }
+        
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .modal-left {
+            text-align: center;
+            position: sticky;
+            top: 0;
+        }
+        .modal-icon-wrapper {
+            font-size: 5rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+        .modal-title {
+            font-size: 2rem;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+        .modal-tips-header {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--color-border);
+            padding-bottom: 0.5rem;
+        }
+        #modal-card-content .tip-list {
+            list-style: none; 
+            padding-left: 0;
+        }
+        #modal-card-content .tip-list li {
+            position: relative; 
+            padding-left: 28px; 
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+        #modal-card-content .tip-list li::before {
+            content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            color: var(--color-accent); 
+            position: absolute; 
+            left: 0; 
+            top: 4px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .modal-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .modal-left {
+                position: static;
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+                text-align: left;
+            }
+            .modal-icon-wrapper {
+                font-size: 3rem;
+                margin-bottom: 0;
+            }
+            .modal-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        #incident { 
+            background-color: var(--color-dark-surface); 
+            position: relative;
+            overflow: hidden;
+        }
+        #incident-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        #incident .container {
+            position: relative;
+            z-index: 2;
+        }
+        #incident .section-header .title, #incident .section-header .description { color: white; }
+        .form-container { 
+            background: rgba(2, 6, 23, 0.7); 
+            backdrop-filter: blur(10px); 
+            padding: 3rem; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+        .incident-form { 
+            position: relative;
+            display: flex;
+            width: 300%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .form-step {
+            width: calc(100% / 3);
+            flex-shrink: 0;
+            padding: 0 1rem;
+        }
+        .form-step-grid {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 1.5rem;
+        }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-group label { color: #a0aec0; font-weight: 500; margin-bottom: 0.5rem; }
+        .form-group input, .form-group select, .form-group textarea { background: rgba(0,0,0,0.2); border: 1px solid #4a5568; padding: 0.9rem; border-radius: 8px; color: white; font-family: var(--font-family); transition: all var(--transition-speed) ease; }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: #718096; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); }
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        .form-progress-bar {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .progress-step {
+            flex: 1;
+            height: 6px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            transition: background-color 0.5s ease;
+        }
+        .progress-step.active {
+            background-color: var(--color-primary);
+        }
+
+        .btn-form {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.8rem 1.5rem;
+        }
+        .btn-form:hover:not(:disabled) {
+            background: rgba(255,255,255,0.2);
+        }
+        .btn-form:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-submit { background-color: var(--color-primary); color: white; justify-content: center; font-size: 1.1rem; border-color: transparent; }
+        .btn-submit:hover { background-color: var(--color-primary-dark); }
+        .form-submission-message { text-align: center; margin-top: 1rem; color: white; opacity: 0; transition: opacity var(--transition-speed) ease; height: 1.5rem; }
+
+        footer { background-color: #010409; color: var(--color-text-muted); padding: 5rem 0 2rem; }
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
+        .footer-section h3 { color: white; margin-bottom: 1rem; } .footer-section ul { list-style: none; }
+        .footer-section li { margin-bottom: 0.5rem; }
+        .footer-section a { color: var(--color-text-muted); text-decoration: none; transition: color var(--transition-speed) ease; }
+        .footer-section a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #334155; padding-top: 2rem; text-align: center; }
+
+        .whatsapp-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+        .whatsapp-chat-box {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition-speed) ease;
+            visibility: hidden;
+        }
+        .whatsapp-chat-box.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        .chat-header {
+            background-color: #075E54;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .chat-header i {
+            font-size: 1.5rem;
+        }
+        .chat-body {
+            background-image: url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg');
+            background-size: contain;
+            padding: 1rem;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .chat-message {
+            background-color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            max-width: 80%;
+            align-self: flex-start;
+            margin-bottom: 1rem;
+        }
+        .chat-footer {
+            display: flex;
+            padding: 0.5rem;
+            background-color: #f0f0f0;
+        }
+        .chat-footer input {
+            flex: 1;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 50px;
+            margin-right: 0.5rem;
+        }
+        .chat-footer button {
+            background-color: #128C7E;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+
+        @media (max-width: 992px) {
+             .section-header .title { font-size: 2.5rem; } .hero h1 { font-size: 3.5rem; }
+             .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--color-surface); flex-direction: column; padding: 1rem; box-shadow: var(--shadow-md); gap: 1rem; align-items: center; }
+            .nav-links.active { display: flex; } .mobile-menu-toggle { display: block; }
+            .hero h1 { font-size: 2.8rem; } .cta-group { flex-direction: column; }
+            .form-step-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .whatsapp-chat-box { width: calc(100vw - 40px); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="https://sites.google.com/view/cyberwingicet" class="logo">
+                <img src="http://googleusercontent.com/file_content/0" alt="CyberWing Logo">
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="https://sites.google.com/view/cyberwingicet">Home</a></li>
+                <li><a href="#" onclick="scrollToSection('services'); return false;">Services</a></li>
+                <li><a href="https://sites.google.com/view/cyberwingicet/team">Our Team</a></li>
+                <li><a href="#" onclick="scrollToSection('awareness'); return false;">Awareness</a></li>
+                <li><a href="#" onclick="scrollToSection('incident'); return false;">Report Incident</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <canvas id="particles-js"></canvas>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Intelligent Defense for the Digital Age.</h1>
+                    <div class="subtitle-container">We provide <span id="typed-subtitle"></span></div>
+                    <div class="cta-group">
+                        <a href="#incident" class="btn btn-primary"><i class="fa-solid fa-shield-halved"></i> Report an Incident</a>
+                        <a href="#services" class="btn btn-secondary"><i class="fa-solid fa-arrow-right"></i> Explore Services</a>
+                    </div>
+                </div>
+            </div>
+            <div id="hero-fade-overlay"></div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">Our Solutions</span>
+                    <h2 class="title">Comprehensive Protection Suite</h2>
+                    <p class="description">We offer a full spectrum of services designed to protect your digital assets at every level.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card" data-tilt>
+                        <i class="fa-solid fa-siren-on icon"></i>
+                        <h3>Incident Response</h3>
+                        <p>Our 24/7 rapid response team mitigates threats in real-time to minimize impact and restore operations swiftly.</p>
+                    </div>
+                    <div class="service-card" data-tilt>
+                        <i class="fa-solid fa-user-secret icon"></i>
+                        <h3>Threat Intelligence</h3>
+                        <p>Stay ahead of attackers with proactive threat hunting and intelligence powered by our global network.</p>
+                    </div>
+                    <div class="service-card" data-tilt>
+                        <i class="fa-solid fa-magnifying-glass-chart icon"></i>
+                        <h3>Risk Assessment</h3>
+                        <p>Identify vulnerabilities in your infrastructure with our in-depth analysis and actionable security roadmaps.</p>
+                    </div>
+                    <div class="service-card" data-tilt>
+                        <i class="fa-solid fa-chalkboard-user icon"></i>
+                        <h3>Security Training</h3>
+                        <p>Empower your team to be your first line of defense with our engaging and effective awareness programs.</p>
+                    </div>
+                </div>
+                <div class="section-cta">
+                    <a href="https://sites.google.com/view/cyberwingicet/team" class="btn btn-primary" style="background-color: var(--color-text); border-color: var(--color-border);">
+                        <i class="fa-solid fa-users"></i> Meet The Experts
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="number" data-target="99.8">0</div>
+                        <div class="label">% Threats Neutralized</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="number" data-target="500">0</div>
+                        <div class="label">+ Clients Protected</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="number" data-target="24">0</div>
+                        <div class="label">/7 Monitoring</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="number" data-target="15">0</div>
+                        <div class="label">Minute Response Time</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="awareness">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">Knowledge is Power</span>
+                    <h2 class="title">Cyber Awareness Hub</h2>
+                    <p class="description">Stay informed with essential security tips to protect your digital life at work and at home.</p>
+                </div>
+                <div class="awareness-slider-container">
+                    <div class="awareness-slider-viewport">
+                        <div class="awareness-slider">
+                            </div>
+                    </div>
+                    <button class="slider-btn prev-btn" aria-label="Previous Topics"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="slider-btn next-btn" aria-label="Next Topics"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div class="slider-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="incident">
+            <canvas id="incident-canvas"></canvas>
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">Emergency</span>
+                    <h2 class="title">Report a Security Incident</h2>
+                    <p class="description">If you're experiencing a breach, provide as much detail as possible. Our team will contact you immediately.</p>
+                </div>
+                <div class="form-container">
+                    <div class="form-progress-bar">
+                        <div class="progress-step active"></div>
+                        <div class="progress-step"></div>
+                        <div class="progress-step"></div>
+                    </div>
+                    <form id="incidentForm">
+                        <div class="incident-form">
+                             <div class="form-step">
+                                <div class="form-step-grid">
+                                    <div class="form-group"><label for="fullName">Full Name *</label><input type="text" id="fullName" name="fullName" required placeholder="John Doe"></div>
+                                    <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email" required placeholder="john.doe@example.com"></div>
+                                </div>
+                                <div class="form-navigation">
+                                    <span></span><button type="button" class="btn btn-form" id="next-step-1">Next <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-step">
+                                 <div class="form-step-grid">
+                                    <div class="form-group full-width"><label for="incidentType">Type of Incident *</label><select id="incidentType" name="incidentType" required><option value="">Please select...</option><option value="ransomware">Ransomware Attack</option><option value="phishing">Phishing / Email Compromise</option><option value="data-breach">Data Breach / Leak</option><option value="malware">Malware / Virus Infection</option><option value="other">Other</option></select></div>
+                                </div>
+                                <div class="form-navigation">
+                                    <button type="button" class="btn btn-form" id="prev-step-1"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                                    <button type="button" class="btn btn-form" id="next-step-2">Next <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-step">
+                                 <div class="form-step-grid">
+                                     <div class="form-group full-width"><label for="incidentDescription">Incident Description *</label><textarea id="incidentDescription" name="incidentDescription" rows="5" required placeholder="Describe the activity, affected systems, and timeline..."></textarea></div>
+                                </div>
+                                <div class="form-navigation">
+                                    <button type="button" class="btn btn-form" id="prev-step-2"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                                    <button type="submit" class="btn btn-submit"><i class="fa-solid fa-paper-plane"></i> Submit Secure Report</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                     <p class="form-submission-message" id="incidentMessage"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                     <a href="https://sites.google.com/view/cyberwingicet" class="logo"><img src="http://googleusercontent.com/file_content/0" alt="CyberWing Logo"></a>
+                     <p style="margin-top: 1rem; filter: brightness(1.5);">Intelligent Defense, backed by academic excellence from Ilahia College of Engineering and Technology, Muvattupuzha.</p>
+                </div>
+                <div class="footer-section"><h3>Services</h3>
+                    <ul>
+                        <li><a href="#" onclick="scrollToSection('services'); return false;">Incident Response</a></li>
+                        <li><a href="#" onclick="scrollToSection('services'); return false;">Threat Intelligence</a></li>
+                        <li><a href="#" onclick="scrollToSection('services'); return false;">Risk Assessment</a></li>
+                        <li><a href="#" onclick="scrollToSection('services'); return false;">Security Training</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section"><h3>Company</h3>
+                    <ul>
+                        <li><a href="https://sites.google.com/view/cyberwingicet/team">Our Team</a></li>
+                        <li><a href="#" onclick="scrollToSection('awareness'); return false;">Awareness</a></li>
+                        <li><a href="#" onclick="scrollToSection('incident'); return false;">Report Incident</a></li>
+                    </ul>4
+                </div>
+                <div class="footer-section"><h3>Legal</h3><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 CyberWing. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-widget">
+        <div class="whatsapp-chat-box" id="whatsapp-chat">
+            <div class="chat-header">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                    <div>CyberWing Support</div>
+                    <div style="font-size: 0.8rem;">Typically replies within minutes</div>
+                </div>
+            </div>
+            <div class="chat-body">
+                <div class="chat-message">
+                    Hello! How can we help you today?
+                </div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="whatsapp-message" placeholder="Type a message...">
+                <button id="send-whatsapp" aria-label="Send Message"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div class="whatsapp-button" id="whatsapp-button">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="awareness-modal">
+        <div class="modal-content-wrapper">
+            <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+            <div id="modal-card-content"></div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            var section = document.getElementById(id);
+            var offset = 100; // Adjust this value based on your page layout
+
+            if (section) {
+                //var sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                //section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        const fadeOverlay = document.getElementById('hero-fade-overlay');
+        if (fadeOverlay) {
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                // MODIFIED: Start fading in after scrolling 30% of the viewport height, and be fully visible by 70%
+                const fadeStart = windowHeight * 0.3;
+                const fadeEnd = windowHeight * 0.7;
+                
+                if (scrollPosition > fadeStart) {
+                    const opacity = Math.min((scrollPosition - fadeStart) / (fadeEnd - fadeStart), 1);
+                    fadeOverlay.style.opacity = opacity;
+                } else {
+                    fadeOverlay.style.opacity = 0;
+                }
+            });
+        }
+        
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            menuToggle.classList.toggle('active'); navLinks.classList.toggle('active');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) {
+                const elements = entry.target.querySelectorAll('.stagger-in');
+                elements.forEach((el, index) => { el.style.transitionDelay = `${index * 100}ms`; el.classList.add('visible'); });
+                observer.unobserve(entry.target);
+            }});
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.services-grid, .stats-grid').forEach(section => {
+            section.querySelectorAll(':scope > *').forEach(child => child.classList.add('stagger-in'));
+            observer.observe(section);
+        });
+        
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => { if (entry.isIntersecting) {
+                const counter = entry.target; const target = +counter.getAttribute('data-target');
+                let current = 0; const increment = target > 0 ? target / 100 : 0;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if(target.toString().includes('.')) {
+                         if (current >= target) { clearInterval(timer); counter.innerText = target.toLocaleString(); }
+                         else { counter.innerText = current.toFixed(1); }
+                    } else {
+                        if (current >= target) { clearInterval(timer); counter.innerText = target.toLocaleString(); }
+                        else { counter.innerText = Math.ceil(current).toLocaleString(); }
+                    }
+                }, 15);
+                observer.unobserve(counter);
+            }});
+        }, { threshold: 0.8 });
+        document.querySelectorAll('.stat-item .number').forEach(counter => statsObserver.observe(counter));
+        
+        const particlesCanvas = document.getElementById('particles-js');
+        if (particlesCanvas) {
+            const ctx = particlesCanvas.getContext('2d');
+            particlesCanvas.width = window.innerWidth;
+            particlesCanvas.height = window.innerHeight;
+            let particlesArray;
+            let mouse = { x: null, y: null, radius: (particlesCanvas.height/110) * (particlesCanvas.width/110) };
+
+            window.addEventListener('mousemove', (event) => { mouse.x = event.x; mouse.y = event.y; });
+            window.addEventListener('resize', () => {
+                particlesCanvas.width = window.innerWidth;
+                particlesCanvas.height = window.innerHeight;
+                mouse.radius = (particlesCanvas.height/110) * (particlesCanvas.width/110);
+                initParticles();
+            });
+            window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
+
+            class Particle {
+                constructor(x, y, dX, dY, size) { this.x = x; this.y = y; this.directionX = dX; this.directionY = dY; this.size = size; }
+                draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = 'rgba(148, 163, 184, 0.5)'; ctx.fill(); }
+                update() {
+                    if (this.x > particlesCanvas.width || this.x < 0) { this.directionX = -this.directionX; }
+                    if (this.y > particlesCanvas.height || this.y < 0) { this.directionY = -this.directionY; }
+                    let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx*dx + dy*dy);
+                    if (distance < mouse.radius + this.size) {
+                        if(mouse.x < this.x && this.x < particlesCanvas.width - this.size * 10) { this.x += 3; }
+                        if(mouse.x > this.x && this.x > this.size * 10) { this.x -= 3; }
+                        if(mouse.y < this.y && this.y < particlesCanvas.height - this.size * 10) { this.y += 3; }
+                        if(mouse.y > this.y && this.y > this.size * 10) { this.y -= 3; }
+                    }
+                    this.x += this.directionX; this.y += this.directionY; this.draw();
+                }
+            }
+
+            function initParticles() {
+                particlesArray = []; let num = (particlesCanvas.height * particlesCanvas.width) / 9000;
+                for (let i=0; i < num; i++) {
+                    let size = (Math.random() * 2) + 1; let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let dX = (Math.random() * 0.4) - 0.2; let dY = (Math.random() * 0.4) - 0.2;
+                    particlesArray.push(new Particle(x, y, dX, dY, size));
+                }
+            }
+
+            function connectParticles() {
+                for (let a=0; a < particlesArray.length; a++) {
+                    for (let b=a; b < particlesArray.length; b++) {
+                        let dist = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (dist < (particlesCanvas.width/7) * (particlesCanvas.height/7)) {
+                            let opacity = 1 - (dist/20000); ctx.strokeStyle = `rgba(148, 163, 184, ${opacity})`;
+                            ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
+                        }
+                    }
+                }
+            }
+            function animateParticles() { requestAnimationFrame(animateParticles); ctx.clearRect(0,0,innerWidth, innerHeight); particlesArray.forEach(p => p.update()); connectParticles(); }
+            initParticles(); animateParticles();
+        }
+
+        const incidentCanvas = document.getElementById('incident-canvas');
+        let digitalRainInterval;
+        let rainSpeed = 30;
+        if (incidentCanvas) {
+            const incCtx = incidentCanvas.getContext('2d');
+            incidentCanvas.width = window.innerWidth;
+            incidentCanvas.height = incidentCanvas.parentElement.offsetHeight;
+            let katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+            let latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let nums = '0123456789';
+            let alphabet = katakana + latin + nums;
+            let fontSize = 16;
+            let columns = incidentCanvas.width / fontSize;
+            let rainDrops = [];
+            for (let x = 0; x < columns; x++) { rainDrops[x] = 1; }
+            const drawDigitalRain = () => {
+                incCtx.fillStyle = 'rgba(2, 6, 23, 0.05)';
+                incCtx.fillRect(0, 0, incidentCanvas.width, incidentCanvas.height);
+                incCtx.fillStyle = 'rgba(59, 130, 246, 0.7)';
+                incCtx.font = fontSize + 'px monospace';
+                for (let i = 0; i < rainDrops.length; i++) {
+                    let text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                    incCtx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                    if (rainDrops[i] * fontSize > incidentCanvas.height && Math.random() > 0.975) { rainDrops[i] = 0; }
+                    rainDrops[i]++;
+                }
+            };
+            const startRain = () => {
+                clearInterval(digitalRainInterval);
+                digitalRainInterval = setInterval(drawDigitalRain, rainSpeed);
+            }
+            window.addEventListener('resize', () => {
+                incidentCanvas.height = incidentCanvas.parentElement.offsetHeight;
+                incidentCanvas.width = window.innerWidth;
+                columns = incidentCanvas.width / fontSize;
+                rainDrops = [];
+                for (let x = 0; x < columns; x++) { rainDrops[x] = 1; }
+            });
+            startRain();
+        }
+        
+        const awarenessData = [
+            { icon: 'fa-shield-virus', title: 'Phishing Scams', desc: 'Deceptive emails designed to steal your credentials. Always question unsolicited requests for personal information.', tips: ['Verify sender email addresses', 'Never click suspicious links', 'Look for typos and urgent language'] },
+            { icon: 'fa-key', title: 'Strong Passwords & 2FA', desc: 'Your password is a key to your digital life. Two-Factor Authentication (2FA) adds a crucial second lock.', tips: ['Use a password manager', 'Enable 2FA everywhere possible', 'Mix uppercase, lowercase, numbers, and symbols'] },
+            { icon: 'fa-wifi', title: 'Public Wi-Fi Risks', desc: 'Unsecured public networks are a hunting ground for attackers. Your data can be easily intercepted.', tips: ['Avoid sensitive transactions', 'Use a trusted VPN service', 'Ensure websites use HTTPS'] },
+            { icon: 'fa-mobile-screen-button', title: 'Mobile Security', desc: 'Your phone contains a wealth of personal data. Protecting it is as important as protecting your computer.', tips: ['Only install apps from official stores', 'Keep your OS and apps updated', 'Be wary of app permissions'] },
+            { icon: 'fa-cloud-arrow-up', title: 'Cloud Security', desc: 'While convenient, cloud services need strong security settings to protect your stored files and data.', tips: ['Use strong, unique passwords', 'Manage sharing permissions carefully', 'Understand the service\'s privacy policy'] },
+            { icon: 'fa-user-secret', title: 'Social Engineering', desc: 'Attackers often manipulate human psychology rather than code to gain access to systems and data.', tips: ['Be skeptical of urgent or emotional requests', 'Verify identities through a separate channel', 'Never share sensitive info on a call'] },
+            { icon: 'fa-file-zipper', title: 'Ransomware Protection', desc: 'This malicious software locks your files until a ransom is paid. Prevention is the best defense.', tips: ['Regularly back up important files offline', 'Be cautious of email attachments', 'Use reputable antivirus software'] },
+            { icon: 'fa-house-laptop', title: 'Secure Remote Work', desc: 'Working from home introduces new security challenges for both employees and companies.', tips: ['Secure your home Wi-Fi network', 'Use company-provided VPNs', 'Keep work and personal devices separate'] },
+            { icon: 'fa-microchip', title: 'IoT Device Security', desc: 'Smart devices, from cameras to thermostats, can be weak points in your network if not properly secured.', tips: ['Change default manufacturer passwords', 'Keep device firmware updated', 'Isolate IoT devices on a separate network'] },
+            { icon: 'fa-triangle-exclamation', title: 'Recognizing Scams', desc: 'Scammers constantly invent new ways to trick you, often with promises of rewards or false emergencies.', tips: ['If it seems too good to be true, it is', 'Legitimate companies won\'t ask for gift cards', 'Slow down and think before you click'] }
+        ];
+
+        const sliderContainer = document.querySelector('.awareness-slider-container');
+        if (sliderContainer) {
+            const sliderViewport = sliderContainer.querySelector('.awareness-slider-viewport');
+            const slider = sliderContainer.querySelector('.awareness-slider');
+            const prevBtn = sliderContainer.querySelector('.prev-btn');
+            const nextBtn = sliderContainer.querySelector('.next-btn');
+            const paginationContainer = sliderContainer.querySelector('.slider-pagination');
+            const modal = document.getElementById('awareness-modal');
+            const modalContent = document.getElementById('modal-card-content');
+            const closeModalBtn = modal.querySelector('.modal-close-btn');
+
+            function createAwarenessCard(item) {
+                const card = document.createElement('div');
+                card.className = 'awareness-card';
+                card.innerHTML = `
+                    <div class="card-banner"><i class="fa-solid ${item.icon} icon"></i></div>
+                    <div class="card-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.desc}</p>
+                        <ul class="tip-list">${item.tips.map(tip => `<li>${tip}</li>`).join('')}</ul>
+                    </div>
+                `;
+                return card;
+            }
+
+            awarenessData.forEach(item => slider.appendChild(createAwarenessCard(item)));
+            const cards = slider.querySelectorAll('.awareness-card');
+            let currentIndex = 0;
+
+            function updateSlider() {
+                if(cards.length === 0) return;
+                const cardStyle = getComputedStyle(cards[0]);
+                const cardMargin = parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
+                const cardWidth = cards[0].offsetWidth + cardMargin;
+                const offset = (sliderViewport.offsetWidth / 2) - (cardWidth / 2);
+                slider.style.transform = `translateX(${offset - currentIndex * cardWidth}px)`;
+
+                cards.forEach((card, i) => {
+                    const offset = i - currentIndex;
+                    card.classList.remove('center', 'left-1', 'right-1', 'left-2', 'right-2', 'hide');
+                    if (offset === 0) card.classList.add('center');
+                    else if (offset === 1) card.classList.add('right-1');
+                    else if (offset === -1) card.classList.add('left-1');
+                    else if (offset === 2) card.classList.add('right-2');
+                    else if (offset === -2) card.classList.add('left-2');
+                    else card.classList.add('hide');
+                });
+                
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === cards.length - 1;
+                updatePagination();
+            }
+
+            function updatePagination() {
+                const dots = paginationContainer.querySelectorAll('.pagination-dot');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            paginationContainer.innerHTML = awarenessData.map((_, i) => 
+                `<button class="pagination-dot" data-index="${i}" aria-label="Go to slide ${i + 1}"></button>`
+            ).join('');
+
+            paginationContainer.addEventListener('click', (e) => {
+                if (e.target.matches('.pagination-dot')) {
+                    currentIndex = parseInt(e.target.getAttribute('data-index'));
+                    updateSlider();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; updateSlider(); } });
+            nextBtn.addEventListener('click', () => { if (currentIndex < cards.length - 1) { currentIndex++; updateSlider(); } });
+
+            function openModal(cardElement) {
+                const iconHTML = cardElement.querySelector('.card-banner').innerHTML;
+                const titleText = cardElement.querySelector('h3').textContent;
+                const descriptionText = cardElement.querySelector('p').textContent;
+                const tipsHTML = cardElement.querySelector('.tip-list').innerHTML;
+
+                modalContent.innerHTML = `
+                    <div class="modal-grid">
+                        <div class="modal-left">
+                            <div class="modal-icon-wrapper">${iconHTML}</div>
+                            <h2 class="modal-title">${titleText}</h2>
+                        </div>
+                        <div class="modal-right">
+                            <p class="modal-description">${descriptionText}</p>
+                            <h4 class="modal-tips-header">Key Takeaways</h4>
+                            <ul class="tip-list">${tipsHTML}</ul>
+                        </div>
+                    </div>
+                `;
+                
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+
+            slider.addEventListener('click', (e) => {
+                const clickedCard = e.target.closest('.awareness-card.center');
+                if(clickedCard) {
+                    openModal(clickedCard);
+                }
+            });
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+
+            window.addEventListener('resize', updateSlider);
+            setTimeout(updateSlider, 100);
+        }
+
+        const whatsappButton = document.getElementById('whatsapp-button');
+        if(whatsappButton) {
+            const whatsappChat = document.getElementById('whatsapp-chat');
+            const sendMessageButton = document.getElementById('send-whatsapp');
+            const messageInput = document.getElementById('whatsapp-message');
+            whatsappButton.addEventListener('click', () => whatsappChat.classList.toggle('active'));
+            sendMessageButton.addEventListener('click', () => {
+                const message = messageInput.value.trim();
+                if (message) {
+                    const phoneNumber = '7510252984'; 
+                    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(url, '_blank');
+                    messageInput.value = '';
+                    whatsappChat.classList.remove('active');
+                }
+            });
+        }
+
+        new Typed('#typed-subtitle', {
+            strings: ['Proactive Threat Hunting.', '24/7 Incident Response.', 'Comprehensive Risk Assessment.', 'Empowering Security Training.'],
+            typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true,
+        });
+        
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400, glare: true, "max-glare": 0.5, });
+        
+        window.addEventListener('load', () => { 
+            document.body.style.opacity = '1'; 
+        });
+    });
+    </script>
+
+    <!-- Google Sheet Communication & Form Working -->
+    <script>
+        const incidentFormEl = document.getElementById("incidentForm");
+        if (incidentFormEl) {
+            const formSteps = document.querySelectorAll(".form-step");
+            const progressSteps = document.querySelectorAll(".progress-step"); // optional if you add progress bar
+            const incidentFormContainer = document.querySelector(".incident-form");
+            let currentStep = 0;
+
+
+            const updateFormSteps = () => {
+                formSteps.forEach((step, index) => {
+                    step.style.display = index === currentStep ? "block" : "none";
+                });
+                
+                if (progressSteps.length) {
+                    progressSteps.forEach((step, index) => {
+                        step.classList.toggle("active", index <= currentStep);
+                    });
+                }
+            };
+
+            const validateStep = (stepIndex) => {
+                const inputs = formSteps[stepIndex].querySelectorAll("input[required], select[required], textarea[required]");
+                for (let input of inputs) {
+                    if (!input.value.trim()) {
+                        input.focus();
+                        return false;
+                    }
+                }
+                return true;
+            };
+
+            document.getElementById("next-step-1").addEventListener("click", () => {
+                if (validateStep(0)) { currentStep = 1; updateFormSteps(); }
+            });
+            document.getElementById("next-step-2").addEventListener("click", () => {
+                if (validateStep(1)) { currentStep = 2; updateFormSteps(); }
+            });
+            document.getElementById("prev-step-1").addEventListener("click", () => {
+                currentStep = 0; updateFormSteps();
+            });
+            document.getElementById("prev-step-2").addEventListener("click", () => {
+                currentStep = 1; updateFormSteps();
+            });
+
+
+            incidentFormEl.addEventListener("submit", function(e) {
+                e.preventDefault();
+                if (!validateStep(currentStep)) return;
+
+                const submitButton = this.querySelector("button[type='submit']");
+                let incidentMessage = document.getElementById("incidentMessage");
+                if (!incidentMessage) {
+                    incidentMessage = document.createElement("p");
+                    incidentMessage.id = "incidentMessage";
+                    this.after(incidentMessage);
+                }
+
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+                const formData = {
+                    fullName: document.getElementById("fullName").value,
+                    email: document.getElementById("email").value,
+                    incidentType: document.getElementById("incidentType").value,
+                    incidentDescription: document.getElementById("incidentDescription").value
+                };
+                console.log(formData)
+                fetch("https://script.google.com/macros/s/AKfycbyUGiua26HFT-8GPq0lipcioV9nTjC2sEVSaTUMTVN6M0tvfFJP9wxMdgdRReeULppjAA/exec", {
+                    method: "POST",
+                    body: JSON.stringify(formData)
+                })
+                .then(res => res.text())
+                .then(data => {
+                    if (data.includes("Success")) {
+                        const incidentID = "CW-" + Date.now().toString().slice(-6);
+                        incidentMessage.textContent = `✅ Success! Report received. Incident ID: ${incidentID}`;
+                        incidentMessage.style.color = "green";
+                        this.reset();
+                        currentStep = 0;
+                        updateFormSteps();
+                    } else {
+                        incidentMessage.textContent = "⚠ Unexpected response: " + data;
+                        incidentMessage.style.color = "orange";
+                    }
+                })
+                .catch(err => {
+                    console.error("Error:", err);
+                    incidentMessage.textContent = "❌ Error submitting report. Please try again.";
+                    incidentMessage.style.color = "red";
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Secure Report';
+                    setTimeout(() => { incidentMessage.textContent = ""; }, 6000);
+                });
+            });
+
+
+            updateFormSteps();
+        }
+    </script>
+
+</body>
+</html>
