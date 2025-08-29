@@ -659,8 +659,8 @@
                     <h1>Intelligent Defense for the Digital Age.</h1>
                     <div class="subtitle-container">We provide <span id="typed-subtitle"></span></div>
                     <div class="cta-group">
-                        <a href="#incident" class="btn btn-primary"><i class="fa-solid fa-shield-halved"></i> Report an Incident</a>
-                        <a href="#services" class="btn btn-secondary"><i class="fa-solid fa-arrow-right"></i> Explore Services</a>
+                        <a href="#" onclick="scrollToSection('incident'); return false;" class="btn btn-primary"><i class="fa-solid fa-shield-halved"></i> Report an Incident</a>
+                        <a href="#" onclick="scrollToSection('services'); return false;" class="btn btn-secondary"><i class="fa-solid fa-arrow-right"></i> Explore Services</a>
                     </div>
                 </div>
             </div>
@@ -1266,22 +1266,25 @@
                     incidentDescription: document.getElementById("incidentDescription").value
                 };
                 console.log(formData)
-                fetch("https://script.google.com/macros/s/AKfycbyUGiua26HFT-8GPq0lipcioV9nTjC2sEVSaTUMTVN6M0tvfFJP9wxMdgdRReeULppjAA/exec", {
+                fetch("https://script.google.com/macros/s/AKfycby-HNWqsYclqyMN1HdcSG4q4e3UGunf_juhW-sVPN2KUfC0TZ7gcsOJMfD2LvBSzPBr6g/exec", {
                     method: "POST",
                     body: JSON.stringify(formData)
                 })
+    
                 .then(res => res.text())
                 .then(data => {
                     if (data.includes("Success")) {
                         const incidentID = "CW-" + Date.now().toString().slice(-6);
-                        incidentMessage.textContent = `✅ Success! Report received. Incident ID: ${incidentID}`;
-                        incidentMessage.style.color = "green";
-                        this.reset();
-                        currentStep = 0;
-                        updateFormSteps();
+                        console.log("Sucess")
+                        document.getElementById("incidentMessage").textContent = `✅ Success! Report received. Incident ID: ${incidentID}`;
+                        document.getElementById("incidentMessage").style.color = "green";
+                        alert(`✅ Report Submitted Sucessfully.\n\nIncident ID: ${incidentID} \n\n We will Contact you soon.`);
+                        //this.reset();
+                        //currentStep = 0;
+                        //updateFormSteps();
                     } else {
-                        incidentMessage.textContent = "⚠ Unexpected response: " + data;
-                        incidentMessage.style.color = "orange";
+                        document.getElementById("incidentMessage").textContent = "⚠ Unexpected response: " + data;
+                        document.getElementById("incidentMessage").style.color = "orange";
                     }
                 })
                 .catch(err => {
@@ -1291,7 +1294,7 @@
                 })
                 .finally(() => {
                     submitButton.disabled = false;
-                    submitButton.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Secure Report';
+                    submitButton.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ✅Success, Incident Reported';
                     setTimeout(() => { incidentMessage.textContent = ""; }, 6000);
                 });
             });
