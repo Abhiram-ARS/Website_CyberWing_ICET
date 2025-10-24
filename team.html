@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team | CyberWing</title>
+    <link rel="icon" href="http://googleusercontent.com/file_content/0" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #3b82f6;
+            --color-primary-dark: #1d4ed8;
+            --color-accent: #10b981;
+            --color-text: #0f172a;
+            --color-text-muted: #64748b;
+            --color-background: #f1f5f9;
+            --color-surface: #ffffff;
+            --color-border: #e2e8f0;
+            --font-family: 'Inter', sans-serif;
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --border-radius: 12px;
+            --transition-speed: 0.3s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-header { text-align: center; margin-bottom: 4rem; padding-top: 120px; }
+        .section-header .title { font-size: 3.5rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .section-header .description { font-size: 1.2rem; color: var(--color-text-muted); max-width: 700px; margin: 0 auto; }
+
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 45px; }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-links a { color: var(--color-text-muted); text-decoration: none; font-weight: 500; position: relative; transition: all var(--transition-speed) ease; }
+        .nav-links a:hover { color: var(--color-primary); }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background: var(--color-primary); transition: all var(--transition-speed) ease; }
+        .nav-links a:hover::after { width: 100%; }
+        .mobile-menu-toggle { display: none; background: none; border: none; cursor: pointer; z-index: 1001; padding: 0.5rem; }
+        .mobile-menu-toggle .icon-bar { display: block; width: 25px; height: 3px; background-color: var(--color-text); margin: 5px 0; transition: all var(--transition-speed) ease; }
+        .mobile-menu-toggle.active .icon-bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .mobile-menu-toggle.active .icon-bar:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.active .icon-bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding-bottom: 6rem;
+        }
+        .team-member-card1 {
+            flex: 0 1 280px;
+            background: var(--color-surface);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            padding: 2rem;
+            transition: all var(--transition-speed) ease;
+        }
+        .team-member-card1:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        .team-member-card1 img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--color-primary);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+        }
+        .team-member-card1 h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .team-member-card1 .role {
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-member-card {
+            flex: 0 1 220px;
+            background: var(--color-surface);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            padding: 2rem;
+            transition: all var(--transition-speed) ease;
+        }
+        .team-member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        .team-member-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--color-primary);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+        }
+        .team-member-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .team-member-card .role {
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .social-links a {
+            color: var(--color-text-muted);
+            font-size: 1.2rem;
+            transition: color var(--transition-speed) ease;
+        }
+        .social-links a:hover {
+            color: var(--color-primary);
+        }
+
+        footer { background-color: #010409; color: var(--color-text-muted); padding: 5rem 0 2rem; }
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
+        .footer-section h3 { color: white; margin-bottom: 1rem; } .footer-section ul { list-style: none; }
+        .footer-section li { margin-bottom: 0.5rem; }
+        .footer-section a { color: var(--color-text-muted); text-decoration: none; transition: color var(--transition-speed) ease; }
+        .footer-section a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #334155; padding-top: 2rem; text-align: center; }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-speed) ease;
+            z-index: 999;
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 30px -5px rgb(0 0 0 / 0.2);
+        }
+        .scroll-to-top:active {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--color-surface); flex-direction: column; padding: 1rem; box-shadow: var(--shadow-md); gap: 1rem; align-items: center; }
+            .nav-links.active { display: flex; } .mobile-menu-toggle { display: block; }
+            .footer-content { grid-template-columns: 1fr; }
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="https://sites.google.com/view/cyberwingicet" class="logo">
+                <img src="https://lh3.googleusercontent.com/d/1Q9xOHvcjftsdixiWYaJHNB6WbYpcZ8lx" alt="CyberWing Logo">
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="https://sites.google.com/view/cyberwingicet/home">Home</a></li>
+                <li><a href="https://sites.google.com/view/cyberwingicet/team">Our Team</a></li>
+                <li><a href="https://sites.google.com/view/cyberwingicet/report_incident">Report Incident</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="team-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="title">The Minds Behind Your Security</h1>
+                    <p class="description">We are a dedicated team of certified cybersecurity professionals, researchers, and academic leaders from Ilahia College of Engineering and Technology, committed to safeguarding your digital future.</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member-card1">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQEy333l9GV_Iw/profile-displayphoto-shrink_400_400/B56ZXBjiJqGUAg-/0/1742709073480?e=1763596800&v=beta&t=C7FKbFSgizr35xj9rEUl0GlSjn7BF1EMMs9sBnERbSw" alt="Team Member">
+                        <h3>Dr. Rosna P Haroon</h3>
+                        <p class="role">Director<br>Cyber Wing ICET </p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/dr-rosna-p-haroon-10361bb/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div>
+                    </div>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member-card1">
+                        <img src="https://th.bing.com/th/id/OIP.eDfds46iXzl6qTA5yVkRJAHaHG?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Team Member">
+                        <h3>Nurjahan V A</h3>
+                        <p class="role">Advisor<br>Cyber Wing ICET </p>
+                        <div class="social-links"><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div>
+                    </div>
+                    <div class="team-member-card1">
+                        <img src="https://th.bing.com/th/id/OIP.eDfds46iXzl6qTA5yVkRJAHaHG?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Team Member">
+                        <h3>Haseena M K</h3>
+                        <p class="role">Advisor<br>Cyber Wing ICET </p>
+                        <div class="social-links"><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div>
+                    </div>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D5635AQF9zPyjMI8FIA/profile-framedphoto-shrink_400_400/B56Zm_swIlH8Ac-/0/1759857804182?e=1761156000&v=beta&t=ggP34KvPcm9AOkqdbi3vmKYfWnQcU32_Ele7HT3N-z8" alt="Team Member">
+                        <h3>Joyal Santosh</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D5635AQEhXqgqWXFaCw/profile-framedphoto-shrink_400_400/B56ZkKcw_zIAAg-/0/1756816937283?e=1761156000&v=beta&t=2hsFWyyHf6myX8xDE7EL-qyFJOMthxDRXXNMVr4EPZ8" alt="Team Member">
+                        <h3>Jikku Abraham Joseph</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/jikku345/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D5635AQEGMlDXzgeGaw/profile-framedphoto-shrink_400_400/B56ZmRJ9hkJ0Ac-/0/1759076931994?e=1761156000&v=beta&t=MTRetVpenP7L04jMu5NjaecCXbCU-qQTtQZYji8tyRY" alt="Team Member">
+                        <h3>Akhilesh A S</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/akhilesh5/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D5635AQHeSPBs4WXMCA/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1737884835117?e=1761753600&v=beta&t=tOeGwuu7dUxPX0hwtZ15qITnS2ClezZmb6smAz_edag" alt="Team Member">
+                        <h3>Fayiz M P</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/akhilesh5/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQGnkaUyHruNig/profile-displayphoto-scale_400_400/B4EZkK7fEEGYAg-/0/1756824992217?e=1763596800&v=beta&t=HmQoU_PLk4Djj6fzHMKhzZ-tI_ohIP6pIHWrvtwgl0g" alt="Team Member">
+                        <h3>Anel Biju</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/anel-biju-a0875b2b5/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHf6lbQlPplvg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1706625244581?e=1763596800&v=beta&t=tc2hWLwJzubV94K7P7AB4KFUmCbyKRLNmK8dIyLHHZo" alt="Team Member">
+                        <h3>Noyal Savio Tenny</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/noyal-savio-tenny-307604291/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQGmXluAbJeT4w/profile-displayphoto-scale_400_400/B56ZhWlz1mH0Ao-/0/1753799409818?e=1763596800&v=beta&t=d0v8ty4qXrYfG2tKXlJXiSvNfGElVlpijq_W-TAZK3Q" alt="Team Member">
+                        <h3>Abhiram S</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/abhiram-s-517b38281/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a><a href="https://github.com/Abhiram-ARS" aria-label="GitHub"><i class="fab fa-github"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQFJFXKatzrnmg/profile-displayphoto-scale_400_400/B4EZl_FLKeGcAg-/0/1758773689080?e=1763596800&v=beta&t=R0SZJFeDMweQWtHKB2jyeELmSODrY5wAygGQ8piiZ_g" alt="Team Member">
+                        <h3>Sachu Suresh</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/sachu-suresh-a087722b2/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQGzFKucIjO_SA/profile-displayphoto-shrink_400_400/B56ZTW6qoAGsAk-/0/1738772491608?e=1763596800&v=beta&t=lsaGxNTk181lWEqrx0yCD7J_9G2c9C4FkR-rq7zfXKM" alt="Team Member">
+                        <h3>Joel Johnson</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/joel-johnson-3134832b9/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQGnm0IXMmAxag/profile-displayphoto-shrink_400_400/B4EZUxb2prGgAg-/0/1740291142011?e=1763596800&v=beta&t=_vrU2HUGlJF915bWmkDi2h2M3CFvy5IiHJKJMX32vBs" alt="Team Member">
+                        <h3>Alvin Biju</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/alvin-biju-4224832b9/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQGkQUH7JExHNQ/profile-displayphoto-scale_400_400/B4DZi9hgRRG8Ag-/0/1755526335024?e=1762992000&v=beta&t=TXHdMnd1E06z6BIwyiW0nEbvK8a6oJoT6ePnwo3ma6k" alt="Team Member">
+                        <h3>Aman Krishna K M</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/aman-krishna-k-m/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQEvxXTsix9RCQ/profile-displayphoto-shrink_400_400/B4DZYq8hDeH4Ag-/0/1744477230299?e=1762992000&v=beta&t=9exAk1jZWsY4KCzLzTfRlcJTV3NXa1kczg9pVTZejn0" alt="Team Member">
+                        <h3>Hasseb P H</h3>
+                        <p class="role">[To be Decided]</p>
+                        <div class="social-links"><a href="https://www.linkedin.com/in/haseeebph/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                     <a href="https://sites.google.com/view/cyberwingicet" class="logo"><img src="https://lh3.googleusercontent.com/d/1Q9xOHvcjftsdixiWYaJHNB6WbYpcZ8lx" alt="CyberWing Logo"></a>
+                     <p style="margin-top: 1rem; filter: brightness(1.5);">Intelligent Defense, backed by academic excellence from Ilahia College of Engineering and Technology, Muvattupuzha.</p>
+                </div>
+                <div class="footer-section"><h3></h3>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="footer-section"><h3>Company</h3>
+                    <ul>
+                        <li><a href="https://sites.google.com/view/cyberwingicet/team">Our Team</a></li>
+                        <li><a href="https://sites.google.com/view/cyberwingicet">Home</a></li>
+                        <li><a href="https://sites.google.com/view/cyberwingicet/report_incident">Report Incident</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section"><h3>Social Media</h3>
+                    <ul>
+                        <li><a href="https://www.instagram.com" target="_blank">
+                                <i class="fa-brands fa-instagram fa-2x"></i>
+                        </a></li>
+                        <li><a href="https://www.linkedin.com" target="_blank">
+                                <i class="fa-brands fa-linkedin fa-2x"></i>
+                        </a></li>
+                    </ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 CyberWing. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Scroll to Top functionality
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            // Smooth scroll to top when clicked
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

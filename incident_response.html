@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberWing | Intelligent & Interactive Digital Defense</title>
+    <link rel="icon" href="http://googleusercontent.com/file_content/0" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --color-primary:#3b82f6; --color-primary-dark:#1d4ed8; --color-accent:#10b981;
+            --color-text:#0f172a; --color-text-muted:#64748b; --color-background:#f1f5f9;
+            --color-surface:#ffffff; --color-border:#e2e8f0; --color-dark-surface:#020617;
+            --font-family:'Inter',sans-serif; --border-radius:12px; --transition-speed:0.3s;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font-family);background-color:var(--color-background);color:var(--color-text);line-height:1.6;overflow-x:hidden}
+        body.modal-open{overflow:hidden}
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}
+        section{padding:6rem 0;position:relative}
+        .section-header{text-align:center;margin-bottom:4rem}
+        .section-header .subtitle{color:var(--color-primary);font-weight:600;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:1px}
+        .section-header .title{font-size:3rem;font-weight:800;margin-bottom:1.5rem}
+        .section-header .description{font-size:1.1rem;color:var(--color-text-muted);max-width:600px;margin:0 auto}
+
+        /* Header / nav */
+        header{position:fixed;top:0;width:100%;z-index:1000;padding:1.5rem 0;transition:all var(--transition-speed) ease}
+        header.scrolled{background:rgba(2,6,23,.8);backdrop-filter:blur(10px);box-shadow:0 4px 6px -1px rgba(0,0,0,.05);padding:.75rem 0}
+        nav{display:flex;justify-content:space-between;align-items:center}
+        .logo img { 
+            height: 100px; 
+            width: 100px; 
+            transition: all var(--transition-speed) ease; 
+        }
+        .nav-links{display:flex;list-style:none;gap:2.5rem}
+        .nav-links a{color:#94a3b8;text-decoration:none;font-weight:500;position:relative}
+        .nav-links a:hover{color:#fff}
+        .nav-links a::after{content:'';position:absolute;width:0;height:2px;bottom:-5px;left:0;background:#a855f7;transition:all .3s}
+        .nav-links a:hover::after{width:100%}
+        .mobile-menu-toggle{display:none;background:none;border:none;cursor:pointer;z-index:1001;padding:.5rem}
+        .mobile-menu-toggle .icon-bar{display:block;width:25px;height:3px;background-color:#fff;margin:5px 0;transition:all .3s}
+
+        /* Incident form / canvas */
+        #incident{background-color:var(--color-dark-surface);position:relative;overflow:hidden}
+        #incident-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
+        #incident .container{position:relative;z-index:2}
+        #incident .section-header .title,#incident .section-header .description{color:#fff}
+        .form-container{background:rgba(2,6,23,.7);backdrop-filter:blur(10px);padding:3rem;border-radius:20px;border:1px solid rgba(255,255,255,.08);overflow:hidden}
+        .incident-form{position:relative;display:flex;width:300%;transition:transform .5s ease-in-out}
+        .form-step{width:calc(100%/3);flex-shrink:0;padding:0 1rem}
+        .form-step-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        .form-group{display:flex;flex-direction:column}
+        .form-group.full-width{grid-column:1/-1}
+        .form-group label{color:#a0aec0;font-weight:500;margin-bottom:.5rem}
+
+        .form-group input, .form-group select, .form-group textarea { background: rgba(0,0,0,0.2); border: 1px solid #4a5568; padding: 0.9rem; border-radius: 8px; color: white; font-family: var(--font-family); transition: all var(--transition-speed) ease; }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: #718096; }
+        .form-group input, .form-group select, .form-group textarea { 
+            background: rgb(255, 255, 255); 
+            border: 1px solid #4a5568; 
+            padding: 0.9rem; border-radius: 8px; 
+            color: rgb(0, 0, 0); 
+            font-family: var(--font-family); 
+            transition: all var(--transition-speed) ease; }
+        .form-navigation{display:flex;justify-content:space-between;margin-top:1.5rem}
+        .form-progress-bar{margin-bottom:2rem;display:flex;gap:1rem}
+        .progress-step{flex:1;height:6px;background-color:rgba(255,255,255,.2);border-radius:3px;transition:background-color .5s}
+        .progress-step.active{background-color:var(--color-primary)}
+        .btn-form{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.12);padding:.8rem 1.5rem}
+        .btn-form:hover:not(:disabled){background:rgba(255,255,255,.18)}
+        .btn-submit{background-color:var(--color-primary);color:#fff;border-color:transparent;padding:.8rem 1.5rem}
+        .btn-submit:hover{background-color:var(--color-primary-dark)}
+
+        /* Modal */
+        .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(15,23,42,.8);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+        .modal-overlay.active{opacity:1;visibility:visible}
+        .modal-content-wrapper{background:var(--color-surface);border-radius:var(--border-radius);max-width:700px;width:90%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 20px 25px rgba(0,0,0,.1);padding:2rem}
+        .modal-close-btn{position:absolute;top:15px;right:20px;background:none;border:none;font-size:2.2rem;color:#64748b;cursor:pointer}
+        .modal-grid{display:grid;grid-template-columns:1fr 2.5fr;gap:2.5rem}
+        .modal-left{text-align:center} 
+        .modal-icon-wrapper{font-size:4rem;color:var(--color-primary);margin-bottom:1rem}
+        .modal-title{font-size:1.5rem;font-weight:800}
+        .modal-description{color:var(--color-text-muted);margin-bottom:1rem}
+        .modal-tips-header{font-weight:700;margin-bottom:.75rem;border-bottom:2px solid var(--color-border);padding-bottom:.5rem}
+        #modal-card-content .tip-list{list-style:none;padding-left:0}
+        #modal-card-content .tip-list li{position:relative;padding-left:28px;margin-bottom:.6rem}
+
+        /* WhatsApp widget */
+        .whatsapp-widget{position:fixed;bottom:20px;right:20px;z-index:1000}
+        .whatsapp-button{background-color:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 10px 15px rgba(0,0,0,.08);cursor:pointer}
+        .whatsapp-chat-box{position:absolute;bottom:80px;right:0;width:350px;background:var(--color-surface);border-radius:var(--border-radius);box-shadow:0 20px 25px rgba(0,0,0,.08);overflow:hidden;opacity:0;transform:translateY(20px);transition:all .3s;visibility:hidden}
+        .whatsapp-chat-box.active{opacity:1;transform:translateY(0);visibility:visible}
+        .chat-header{background:#075E54;color:#fff;padding:1rem;display:flex;align-items:center;gap:1rem}
+        .chat-body{background-image:url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg');background-size:contain;padding:1rem;height:300px;display:flex;flex-direction:column;justify-content:flex-end}
+
+        footer{background:#010409;color:var(--color-text-muted);padding:5rem 0 2rem}
+        .footer-bottom{border-top:1px solid #334155;padding-top:2rem;text-align:center}
+
+        @media(max-width:768px){.nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--color-surface);flex-direction:column;padding:1rem;box-shadow:0 10px 15px rgba(0,0,0,.06);gap:1rem}.nav-links.active{display:flex}.mobile-menu-toggle{display:block}.whatsapp-chat-box{width:calc(100vw - 40px)}}
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="https://sites.google.com/view/cyberwingicet" class="logo">
+                <img src="https://lh3.googleusercontent.com/d/1Q9xOHvcjftsdixiWYaJHNB6WbYpcZ8lx" alt="CyberWing Logo">
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="https://sites.google.com/view/cyberwingicet">Home</a></li>
+                <li><a href="https://sites.google.com/view/cyberwingicet/team">Our Team</a></li>
+                <li><a href="https://sites.google.com/view/cyberwingicet/report_incident">Report Incident</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>       
+            <section id="incident">
+            <canvas id="incident-canvas"></canvas>
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">Emergency</span>
+                    <h2 class="title">Report a Security Incident</h2>
+                    <p class="description">If you're experiencing a breach, provide as much detail as possible. Our team will contact you immediately.</p>
+                </div>
+                <div class="form-container">
+                    <div class="form-progress-bar">
+                        <div class="progress-step active"></div>
+                        <div class="progress-step"></div>
+                        <div class="progress-step"></div>
+                    </div>
+                    <form id="incidentForm">
+                        <div class="incident-form">
+                             <div class="form-step">
+                                <div class="form-step-grid">
+                                    <div class="form-group"><label for="fullName">Full Name *</label><input type="text" id="fullName" name="fullName" required placeholder="John Doe"></div>
+                                    <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email" required placeholder="john.doe@example.com"></div>
+                                </div>
+                                <div class="form-navigation">
+                                    <span></span><button type="button" class="btn btn-form" id="next-step-1">Next <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-step">
+                                 <div class="form-step-grid">
+                                    <div class="form-group full-width"><label for="incidentType">Type of Incident *</label><select id="incidentType" name="incidentType" required><option value="">Please select...</option><option value="ransomware">Ransomware Attack</option><option value="phishing">Phishing / Email Compromise</option><option value="data-breach">Data Breach / Leak</option><option value="malware">Malware / Virus Infection</option><option value="other">Other</option></select></div>
+                                </div>
+                                <div class="form-navigation">
+                                    <button type="button" class="btn btn-form" id="prev-step-1"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                                    <button type="button" class="btn btn-form" id="next-step-2">Next <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-step">
+                                 <div class="form-step-grid">
+                                     <div class="form-group full-width"><label for="incidentDescription">Incident Description *</label><textarea id="incidentDescription" name="incidentDescription" rows="5" required placeholder="Describe the activity, affected systems, and timeline..."></textarea></div>
+                                </div>
+                                <div class="form-navigation">
+                                    <button type="button" class="btn btn-form" id="prev-step-2"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                                    <button type="submit" class="btn btn-submit"><i class="fa-solid fa-paper-plane"></i> Submit Secure Report</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                     <p class="form-submission-message" id="incidentMessage"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bottom"><p>&copy; 2025 CyberWing. All Rights Reserved.</p></div>
+    </footer>
+
+    <div class="whatsapp-widget">
+        <div class="whatsapp-chat-box" id="whatsapp-chat">
+            <div class="chat-header">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                    <div>CyberWing Support</div>
+                    <div style="font-size: 0.8rem;">Typically replies within minutes</div>
+                </div>
+            </div>
+            <div class="chat-body">
+                <div class="chat-message">
+                    Hello! How can we help you today?
+                </div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="whatsapp-message" placeholder="Type a message...">
+                <button id="send-whatsapp" aria-label="Send Message"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div class="whatsapp-button" id="whatsapp-button">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="awareness-modal">
+        <div class="modal-content-wrapper">
+            <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+            <div id="modal-card-content"></div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            var section = document.getElementById(id);
+            var offset = 100; // Adjust this value based on your page layout
+
+            if (section) {
+                //var sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                //section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+
+    <script>
+    (function(){
+        // Header scroll class
+        const header = document.querySelector('header');
+        if (header) window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+        // Mobile menu toggle (defensive)
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Incident canvas digital rain
+        (function initDigitalRain(){
+            const incidentCanvas = document.getElementById('incident-canvas');
+            if (!incidentCanvas) return;
+            const incCtx = incidentCanvas.getContext('2d');
+            let fontSize = 16;
+            let katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+            let latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let nums = '0123456789';
+            let alphabet = katakana + latin + nums;
+            let columns = 0;
+            let rainDrops = [];
+            let digitalRainInterval;
+            let rainSpeed = 30;
+
+            function resize() {
+                incidentCanvas.width = window.innerWidth;
+                incidentCanvas.height = incidentCanvas.parentElement ? incidentCanvas.parentElement.offsetHeight : window.innerHeight;
+                columns = Math.floor(incidentCanvas.width / fontSize) || 1;
+                rainDrops = new Array(columns).fill(1);
+            }
+
+            function draw() {
+                incCtx.fillStyle = 'rgba(2, 6, 23, 0.05)';
+                incCtx.fillRect(0, 0, incidentCanvas.width, incidentCanvas.height);
+                incCtx.fillStyle = 'rgba(59, 130, 246, 0.7)';
+                incCtx.font = fontSize + 'px monospace';
+                for (let i = 0; i < rainDrops.length; i++) {
+                    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                    incCtx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                    if (rainDrops[i] * fontSize > incidentCanvas.height && Math.random() > 0.975) rainDrops[i] = 0;
+                    rainDrops[i]++;
+                }
+            }
+
+            function start() {
+                clearInterval(digitalRainInterval);
+                digitalRainInterval = setInterval(draw, rainSpeed);
+            }
+
+            window.addEventListener('resize', () => { resize(); });
+            resize(); start();
+        })();
+
+        // Awareness modal close handlers (modal exists in DOM)
+        (function modalHandlers(){
+            const modal = document.getElementById('awareness-modal');
+            if (!modal) return;
+            const closeModalBtn = modal.querySelector('.modal-close-btn');
+            function closeModal(){ modal.classList.remove('active'); document.body.classList.remove('modal-open'); }
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e)=> { if (e.target === modal) closeModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+        })();
+
+        // WhatsApp widget
+        (function whatsapp(){
+            const whatsappButton = document.getElementById('whatsapp-button');
+            if (!whatsappButton) return;
+            const whatsappChat = document.getElementById('whatsapp-chat');
+            const sendMessageButton = document.getElementById('send-whatsapp');
+            const messageInput = document.getElementById('whatsapp-message');
+            whatsappButton.addEventListener('click', () => { if (whatsappChat) whatsappChat.classList.toggle('active'); });
+            if (sendMessageButton && messageInput) {
+                sendMessageButton.addEventListener('click', () => {
+                    const message = messageInput.value.trim();
+                    if (!message) return;
+                    const phoneNumber = '7510252984';
+                    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(url, '_blank');
+                    messageInput.value = '';
+                    if (whatsappChat) whatsappChat.classList.remove('active');
+                });
+            }
+        })();
+    })();
+    </script>
+
+    <!-- Google Sheet Communication & Form Working -->
+    <script>
+        const incidentFormEl = document.getElementById("incidentForm");
+        if (incidentFormEl) {
+            const formSteps = document.querySelectorAll(".form-step");
+            const progressSteps = document.querySelectorAll(".progress-step"); // optional if you add progress bar
+            const incidentFormContainer = document.querySelector(".incident-form");
+            let currentStep = 0;
+
+
+            const updateFormSteps = () => {
+                formSteps.forEach((step, index) => {
+                    step.style.display = index === currentStep ? "block" : "none";
+                });
+                
+                if (progressSteps.length) {
+                    progressSteps.forEach((step, index) => {
+                        step.classList.toggle("active", index <= currentStep);
+                    });
+                }
+            };
+
+            const validateStep = (stepIndex) => {
+                const inputs = formSteps[stepIndex].querySelectorAll("input[required], select[required], textarea[required]");
+                for (let input of inputs) {
+                    if (!input.value.trim()) {
+                        input.focus();
+                        return false;
+                    }
+                }
+                return true;
+            };
+
+            document.getElementById("next-step-1").addEventListener("click", () => {
+                if (validateStep(0)) { currentStep = 1; updateFormSteps(); }
+            });
+            document.getElementById("next-step-2").addEventListener("click", () => {
+                if (validateStep(1)) { currentStep = 2; updateFormSteps(); }
+            });
+            document.getElementById("prev-step-1").addEventListener("click", () => {
+                currentStep = 0; updateFormSteps();
+            });
+            document.getElementById("prev-step-2").addEventListener("click", () => {
+                currentStep = 1; updateFormSteps();
+            });
+
+
+            incidentFormEl.addEventListener("submit", function(e) {
+                e.preventDefault();
+                if (!validateStep(currentStep)) return;
+
+                const submitButton = this.querySelector("button[type='submit']");
+                let incidentMessage = document.getElementById("incidentMessage");
+                if (!incidentMessage) {
+                    incidentMessage = document.createElement("p");
+                    incidentMessage.id = "incidentMessage";
+                    this.after(incidentMessage);
+                }
+
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+                const formData = {
+                    fullName: document.getElementById("fullName").value,
+                    email: document.getElementById("email").value,
+                    incidentType: document.getElementById("incidentType").value,
+                    incidentDescription: document.getElementById("incidentDescription").value
+                };
+                console.log(formData)
+                fetch("https://script.google.com/macros/s/AKfycby-HNWqsYclqyMN1HdcSG4q4e3UGunf_juhW-sVPN2KUfC0TZ7gcsOJMfD2LvBSzPBr6g/exec", {
+                    method: "POST",
+                    body: JSON.stringify(formData)
+                })
+    
+                .then(res => res.text()) // Convert response to text
+                .then(data => {
+                    console.log(data);  // Log the response to see exactly what is returned
+
+                    // Check if the response contains the word "Success"
+                    if (data.includes("Success")) {
+                        const incidentID = "CW-" + Date.now().toString().slice(-6);
+                        console.log("Success")
+                        
+                        // Display success message
+                        document.getElementById("incidentMessage").textContent = `✅ Success! Report received. Incident ID: ${incidentID}`;
+                        document.getElementById("incidentMessage").style.color = "green";
+                        
+                        // Show an alert for the user
+                        alert(`✅ Report Submitted Successfully.\n\nIncident ID: ${incidentID}\n\n We will Contact you soon.`);
+                    } else {
+                        // If response is unexpected, show a warning
+                        document.getElementById("incidentMessage").textContent = "⚠ Unexpected response: " + data;
+                        document.getElementById("incidentMessage").style.color = "orange";
+                    }
+                })
+                .catch(err => {
+                    // Handle network or other errors
+                    console.error("Error:", err);
+                    submitButton.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ❌ Error submitting report. Please try again.';
+                    incidentMessage.style.color = "red";
+                })
+                .finally(() => {
+                    // Reset the submit button
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ✅Success, Incident Reported';
+                    
+                    // Clear the message after 6 seconds
+                    setTimeout(() => { incidentMessage.textContent = ""; }, 6000);
+                });
+
+            });
+
+
+            updateFormSteps();
+        }
+    </script>
+
+</body>
+</html>
