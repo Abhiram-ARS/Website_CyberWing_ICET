@@ -6,15 +6,19 @@ The website will provide resources, event details, membership information, and i
 # Team 
 **Website Development Team of Cyber Wing ICET** is a passionate and skilled group of cybersecurity and web development enthusiasts who worked together to develop a secure and dynamic website for the Cyber Wing ICET. Our team combines expertise in web development and project management to deliver a platform that meets the organization's needs.
 
+- [Akhilesh A S](https://www.linkedin.com/in/akhilesh5/)
+  - Frontend Developer, DevSecOps, Security Analyst.
+    
 - _[Abhiram S](https://github.com/Abhiram-ARS)_
-  - Deployment In-Charge
-  - Backend Developer
-  - Database Manager
+  - DevOps, Backend Developer, Database Designer.
+    
+- [Aman Krishna K M](https://www.linkedin.com/in/aman-krishna-k-m/)
+  - UI-UX Designer, Frontend Tester.
 
+- [Sachu Suresh](https://github.com/Anonymousprvt)
+  
 - _[Bibin Boby Varghese](https://github.com/bibinbobyvarghese)_
-  - Frontend Developer
-  - Visual Designer
-  - Theme Designer
+  - Frontend Developer(ex)
 
 # Deployment
 Hosted Link : https://sites.google.com/view/cyberwingicet
