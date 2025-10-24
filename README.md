@@ -10,12 +10,13 @@ The website will provide resources, event details, membership information, and i
   - Frontend Developer, DevSecOps, Security Analyst.
     
 - _[Abhiram S](https://github.com/Abhiram-ARS)_
-  - DevOps, Backend Developer, Database Designer.
+  - DevOps, Backend Developer, Database Architect.
     
 - [Aman Krishna K M](https://www.linkedin.com/in/aman-krishna-k-m/)
   - UI-UX Designer, Frontend Tester.
 
 - [Sachu Suresh](https://github.com/Anonymousprvt)
+  - Media Designer, Security Analyst, Tester
   
 - _[Bibin Boby Varghese](https://github.com/bibinbobyvarghese)_
   - Frontend Developer(ex)
