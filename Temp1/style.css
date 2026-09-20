@@ -171,6 +171,36 @@ img {
   text-transform: uppercase;
 }
 
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 24px;
+  white-space: nowrap;
+}
+
+.language-button {
+  border: 0;
+  background: transparent;
+  color: var(--text-light);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 2px;
+  transition: var(--transition-fast);
+}
+
+.language-button:hover,
+.language-button.active {
+  color: var(--primary);
+}
+
+.language-divider {
+  color: var(--text-light);
+  opacity: 0.6;
+}
+
 .nav-link {
   color: var(--text-light);
   position: relative;
@@ -1363,6 +1393,18 @@ img {
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 48px;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  /* Navbar */
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
   }
 }
 
