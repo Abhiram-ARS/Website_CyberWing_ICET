@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CyberWing | Intelligent Defense for the Digital Age</title>
+  <title data-i18n="CyberWing | Intelligent Defense for the Digital Age">CyberWing | Intelligent Defense for the Digital Age</title>
   <meta name="description"
     content="CyberWing provides 24/7 incident response, threat intelligence, risk assessments, and security training. Backed by academic excellence from Ilahia College of Engineering and Technology." />
 
@@ -63,16 +63,22 @@
 
 
       <nav class="nav-links" aria-label="Main Navigation">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#collaborators" class="nav-link">Collaborators</a>
-        <a href="#awareness" class="nav-link">Awareness</a>
-        <a href="#team" class="nav-link">Our Team</a>
-        <a href="#report-incident" class="nav-link">Report Incident</a>
+        <a href="#home" class="nav-link active" data-i18n="Home">Home</a>
+        <a href="#services" class="nav-link" data-i18n="Services">Services</a>
+        <a href="#collaborators" class="nav-link" data-i18n="Collaborators">Collaborators</a>
+        <a href="#awareness" class="nav-link" data-i18n="Awareness">Awareness</a>
+        <a href="#team" class="nav-link" data-i18n="Our Team">Our Team</a>
+        <a href="#contact" class="nav-link" data-i18n="Contact">Contact</a>
       </nav>
 
 
-      <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false"
+      <div class="language-switcher" aria-label="Language selection">
+        <button type="button" class="language-button active" data-language="en" aria-pressed="true">English</button>
+        <span class="language-divider" aria-hidden="true">/</span>
+        <button type="button" class="language-button" data-language="ml" aria-pressed="false">മലയാളം</button>
+      </div>
+
+      <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" data-i18n-aria-label="Toggle Menu" aria-expanded="false"
         aria-controls="mobile-nav-menu">
         <svg class="hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -82,12 +88,12 @@
 
 
     <nav class="mobile-menu" id="mobile-nav-menu" aria-label="Mobile Navigation">
-      <a href="#home" class="mobile-link">Home</a>
-      <a href="#services" class="mobile-link">Services</a>
-      <a href="#collaborators" class="mobile-link">Collaborators</a>
-      <a href="#team" class="mobile-link">Our Team</a>
-      <a href="#awareness" class="mobile-link">Awareness</a>
-      <a href="#report-incident" class="mobile-link">Report Incident</a>
+      <a href="#home" class="mobile-link" data-i18n="Home">Home</a>
+      <a href="#services" class="mobile-link" data-i18n="Services">Services</a>
+      <a href="#collaborators" class="mobile-link" data-i18n="Collaborators">Collaborators</a>
+      <a href="#team" class="mobile-link" data-i18n="Our Team">Our Team</a>
+      <a href="#awareness" class="mobile-link" data-i18n="Awareness">Awareness</a>
+      <a href="#report-incident" class="mobile-link" data-i18n="Report Incident">Report Incident</a>
     </nav>
   </header>
 
@@ -133,7 +139,7 @@
     <section id="services" class="services-section">
       <div class="container">
         <div class="section-header scroll-reveal">
-          <h2 class="section-big-title font-teko">Our Solutions:<br /><span class="highlight-text">Comprehensive
+            <h2 class="section-big-title font-teko"><span data-i18n="Our Solutions:">Our Solutions:</span><br /><span class="highlight-text" data-i18n="Comprehensive Protection Suite.">Comprehensive
               Protection Suite.</span></h2>
           <p class="section-subtitle">We offer a full spectrum of services designed to protect your digital assets at
             every level.</p>
@@ -244,7 +250,7 @@
     <section id="awareness" class="awareness-section">
       <div class="container">
         <div class="section-header scroll-reveal">
-          <h2 class="section-big-title font-teko">Knowledge is Power:<br /><span class="highlight-text">Cyber Awareness
+            <h2 class="section-big-title font-teko"><span data-i18n="Knowledge is Power:">Knowledge is Power:</span><br /><span class="highlight-text" data-i18n="Cyber Awareness Hub">Cyber Awareness
               Hub</span></h2>
           <p class="section-subtitle">Stay informed with essential security tips to protect your digital life at work
             and at home.</p>
@@ -481,7 +487,7 @@
       <div class="team-bg-gradient" aria-hidden="true"></div>
       <div class="container">
         <div class="section-header scroll-reveal">
-          <h2 class="section-big-title font-teko">Meet The<br /><span class="highlight-text">Experts</span></h2>
+          <h2 class="section-big-title font-teko"><span data-i18n="Meet The">Meet The</span><br /><span class="highlight-text" data-i18n="Experts">Experts</span></h2>
           <p class="section-subtitle">We are a dedicated team of certified cybersecurity professionals, researchers, and
             academic leaders from Ilahia College of Engineering and Technology, committed to safeguarding your digital
             future.</p>
@@ -624,70 +630,7 @@
                 <p class="member-desc">Management Team</p>
               </div>
             </article>
-
-            <!-- Lead 5 -->
-            <article class="team-member">
-              <div class="member-bg-glow" aria-hidden="true"></div>
-              <div class="member-avatar">
-                <div class="avatar-bg" aria-hidden="true"></div>
-                <span class="avatar-initial">A</span>
-              </div>
-              <div class="member-info">
-                <span class="member-badge">Security Lead</span>
-                <h3 class="member-name">Amarnath Mohn</h3>
-                <p class="member-role">Senior Analyst & Lead</p>
-                <div class="divider"></div>
-                <p class="member-desc">Security Team</p>
-              </div>
-            </article>
-            <article class="team-member">
-              <div class="member-bg-glow" aria-hidden="true"></div>
-              <div class="member-avatar">
-                <div class="avatar-bg" aria-hidden="true"></div>
-                <span class="avatar-initial">A</span>
-              </div>
-              <div class="member-info">
-                <span class="member-badge">Community Lead</span>
-                <h3 class="member-name">Adnan Shanavas</h3>
-                <p class="member-role">Senior Analyst & Lead</p>
-                <div class="divider"></div>
-                <p class="member-desc">Community Team</p>
-              </div>
-            </article>
-            <!-- Lead 6 -->
-            <article class="team-member">
-              <div class="member-bg-glow" aria-hidden="true"></div>
-              <div class="member-avatar">
-                <div class="avatar-bg" aria-hidden="true"></div>
-                <span class="avatar-initial">A</span>
-              </div>
-              <div class="member-info">
-                <span class="member-badge">Marketing Lead</span>
-                <h3 class="member-name">Aman Kuriakose</h3>
-                <p class="member-role">Senior Analyst & Lead</p>
-                <div class="divider"></div>
-                <p class="member-desc">Marketing Team</p>
-              </div>
-            </article>
-
-
-            <article class="team-member">
-              <div class="member-bg-glow" aria-hidden="true"></div>
-              <div class="member-avatar">
-                <div class="avatar-bg" aria-hidden="true"></div>
-                <span class="avatar-initial">S</span>
-              </div>
-              <div class="member-info">
-                <span class="member-badge">Research Lead</span>
-                <h3 class="member-name">Muhammed Aslam </h3>
-                <p class="member-role">Senior Analyst & Lead</p>
-                <div class="divider"></div>
-                <p class="member-desc">Research Team</p>
-              </div>
-            </article>
           </div>
-
-
           <!-- Tier 4: Co-Leads / Juniors -->
           <div class="team-tier tier-coleads scroll-reveal">
             <!-- Co-lead 1 -->
@@ -721,70 +664,6 @@
                 <p class="member-desc">Operational Team</p>
               </div>
             </article>
-
-            <!-- Co-lead 3 -->
-            <article class="team-member">
-              <div class="member-bg-glow" aria-hidden="true"></div>
-              <div class="member-avatar">
-                <div class="avatar-bg" aria-hidden="true"></div>
-                <span class="avatar-initial">A</span>
-              </div>
-              <div class="member-info">
-                <span class="member-badge">Security Co-lead</span>
-                <h3 class="member-name">Amar Ashique</h3>
-                <p class="member-role">Junior Analyst & Co-Lead</p>
-                <div class="divider"></div>
-                <p class="member-desc">Security Team</p>
-              </div>
-            </article>
-
-            <!-- Co-lead 4 -->
-            <article class="team-member">
-              <div class="member-bg-glow" aria-hidden="true"></div>
-              <div class="member-avatar">
-                <div class="avatar-bg" aria-hidden="true"></div>
-                <span class="avatar-initial">M</span>
-              </div>
-              <div class="member-info">
-                <span class="member-badge">Marketing Co-lead</span>
-                <h3 class="member-name">Muhammed Thaha</h3>
-                <p class="member-role">Junior Analyst & Co-Lead</p>
-                <div class="divider"></div>
-                <p class="member-desc">Marketing Team</p>
-              </div>
-            </article>
-
-            <!-- Co-lead 5 -->
-            <article class="team-member">
-              <div class="member-bg-glow" aria-hidden="true"></div>
-              <div class="member-avatar">
-                <div class="avatar-bg" aria-hidden="true"></div>
-                <span class="avatar-initial">A</span>
-              </div>
-              <div class="member-info">
-                <span class="member-badge">Management Co-lead</span>
-                <h3 class="member-name">Alshifa Rajeesh</h3>
-                <p class="member-role">Junior Analyst & Co-Lead</p>
-                <div class="divider"></div>
-                <p class="member-desc">Management Team</p>
-              </div>
-            </article>
-
-            <!-- Co-lead 6 -->
-            <article class="team-member">
-              <div class="member-bg-glow" aria-hidden="true"></div>
-              <div class="member-avatar">
-                <div class="avatar-bg" aria-hidden="true"></div>
-                <span class="avatar-initial">A</span>
-              </div>
-              <div class="member-info">
-                <span class="member-badge">Management Co-lead</span>
-                <h3 class="member-name">Aparna J Nair</h3>
-                <p class="member-role">Junior Analyst & Co-Lead</p>
-                <div class="divider"></div>
-                <p class="member-desc">Management Team</p>
-              </div>
-            </article>
           </div>
         </div>
       </div>
@@ -795,7 +674,7 @@
       <div class="container">
         <div class="portal-card">
           <div class="portal-header text-center">
-            <h2 class="section-big-title font-teko">contact us</h2>
+            <h2 class="section-big-title font-teko" data-i18n="contact us">contact us</h2>
             <p class="section-subtitle">Get in touch with us — our team is ready to connect and support you!</p>
           </div>
 
@@ -803,12 +682,12 @@
             <form class="contact-form">
               <div class="form-group">
                 <label for="contact-name">Name</label>
-                <input id="contact-name" type="text" name="name" placeholder="Enter your name" />
+                <input id="contact-name" type="text" name="name" placeholder="Enter your name" data-i18n-placeholder="Enter your name" />
               </div>
 
               <div class="form-group">
                 <label for="contact-phone-email">Phone no./Email</label>
-                <input id="contact-phone-email" type="text" name="contact" placeholder="Enter your phone number or email" />
+                <input id="contact-phone-email" type="text" name="contact" placeholder="Enter your phone number or email" data-i18n-placeholder="Enter your phone number or email" />
               </div>
 
               <div style="display: flex; justify-content: center; margin-top: 20px;">
@@ -958,6 +837,7 @@
   </aside>
 
   <!-- Custom Scripts -->
+  <script src="i18n.js"></script>
   <script src="contact-us.js"></script>
   <script src="script.js"></script>
   <script src="portal-ui.js"></script>
