@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxip0yzNQrVZ71zi7YQ_qOrMr9NS6-hHuFImVzh1j8ge3sAIBG85JuVmWeyyPtrGu8vYw/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyU2xr4ihk4ADG-yroRTmZzhOKBaURtXMhezKscTsp0UyC_zJX0IXw5InBRhaCPMGx4Q/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.contact-form');
